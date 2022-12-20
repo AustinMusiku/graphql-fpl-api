@@ -11,6 +11,8 @@
 		"lint": "eslint --ext .ts src"
 	},
 	"dependencies": {
+		"@graphql-tools/graphql-file-loader": "^7.5.13",
+		"@graphql-tools/load": "^7.8.8",
 		"compression": "^1.7.4",
 		"cors": "^2.8.5",
 		"dataloader": "^2.1.0",

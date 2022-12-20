@@ -1,0 +1,11 @@
+type UpcomingFixture {
+    id: Int,
+    event: Int,
+    minutes: Int,
+    difficulty: Int,
+    team_h: Int,
+    team_a: Int,
+    finished: Boolean,
+    is_home: Boolean,
+    kickoff_time: String
+}
