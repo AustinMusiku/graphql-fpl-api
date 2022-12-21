@@ -1,0 +1,17 @@
+type Query {
+	player(id: Int): Player
+	players(
+		first: Int
+		by_form: Boolean
+		by_transfers: Boolean
+		by_points: Boolean
+		trim_extras: Boolean
+		differentials: Boolean
+		captains: Boolean
+		premiums: Boolean
+		mid_rangers: Boolean
+		budgets: Boolean
+	): [Player]
+	gameweek(id: Int, is_current: Boolean, is_next: Boolean): GameWeek
+	gameweeks(is_finished: Boolean): [GameWeek]
+}
