@@ -1,6 +1,7 @@
+import { PlayerResolvers } from '../types/schema'
 import { GraphQLError } from 'graphql'
 
-export default {
+export const Player: PlayerResolvers = {
 	id: ({ id }) => id,
 	code: ({ code }) => code,
 	chance_of_playing_next_round: ({ chance_of_playing_next_round }) =>

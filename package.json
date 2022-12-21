@@ -6,9 +6,10 @@
 	"main": "src/index.ts",
 	"scripts": {
 		"start": "ts-node src/index.ts",
-		"dev": "nodemon src/index.ts",
+		"dev": "concurrently \"nodemon src/index.ts\" \"yarn codegen --watch\"",
 		"build": "tsc",
-		"lint": "eslint --ext .ts src"
+		"lint": "eslint --ext .ts src",
+		"codegen": "graphql-codegen --config codegen.ts"
 	},
 	"dependencies": {
 		"@graphql-tools/graphql-file-loader": "^7.5.13",
@@ -22,6 +23,9 @@
 		"node-cache": "^5.1.2"
 	},
 	"devDependencies": {
+		"@graphql-codegen/cli": "2.16.1",
+		"@graphql-codegen/typescript": "2.8.5",
+		"@graphql-codegen/typescript-resolvers": "2.7.10",
 		"@graphql-eslint/eslint-plugin": "^3.13.1",
 		"@types/compression": "^1.7.2",
 		"@types/cors": "^2.8.13",
@@ -30,6 +34,7 @@
 		"@types/node": "^18.11.17",
 		"@typescript-eslint/eslint-plugin": "^5.47.0",
 		"@typescript-eslint/parser": "^5.47.0",
+		"concurrently": "^7.6.0",
 		"eslint": "^8.30.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-prettier": "^4.2.1",

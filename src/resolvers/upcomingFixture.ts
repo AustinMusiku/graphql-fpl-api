@@ -1,4 +1,6 @@
-export default {
+import { UpcomingFixtureResolvers } from '../types/schema'
+
+export const UpcomingFixture: UpcomingFixtureResolvers = {
 	id: ({ id }) => id,
 	event: ({ event }) => event,
 	minutes: ({ minutes }) => minutes,

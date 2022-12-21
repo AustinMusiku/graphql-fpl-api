@@ -1,4 +1,6 @@
-export default {
+import { GameWeekResolvers } from '../types/schema'
+
+export const GameWeek: GameWeekResolvers = {
 	id: ({ id }) => id,
 	highest_score: ({ highest_score }) => highest_score,
 	deadline_time: ({ deadline_time }) => deadline_time,

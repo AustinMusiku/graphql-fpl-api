@@ -1,4 +1,6 @@
-export default {
+import { PastFixtureResolvers } from '../types/schema'
+
+export const PastFixture: PastFixtureResolvers = {
 	was_home: ({ was_home }) => was_home,
 	opponent_team: ({ opponent_team }) => opponent_team,
 	total_points: ({ total_points }) => total_points,

@@ -1,7 +1,14 @@
+import {
+	QueryGameweekArgs,
+	QueryGameweeksArgs,
+	QueryPlayerArgs,
+	QueryPlayersArgs,
+	QueryResolvers
+} from '../types/schema'
 import fetchControllers from '../controllers/fetchControllers'
 
-export default {
-	gameweeks: async (_: unknown, { is_finished }) => {
+export const Query: QueryResolvers = {
+	gameweeks: async (_: unknown, { is_finished }: QueryGameweeksArgs) => {
 		let gws = await fetchControllers.gameWeeks()
 		if (is_finished) {
 			gws = gws.filter(({ finished }) => finished === true)
@@ -10,7 +17,10 @@ export default {
 		}
 		return gws
 	},
-	gameweek: async (_: unknown, { id, is_current, is_next }) => {
+	gameweek: async (
+		_: unknown,
+		{ id, is_current, is_next }: QueryGameweekArgs
+	) => {
 		const gws = await fetchControllers.gameWeeks()
 		if (id) {
 			return gws.find((gw) => gw.id === id)
@@ -35,7 +45,7 @@ export default {
 			mid_rangers,
 			budgets,
 			first
-		}
+		}: QueryPlayersArgs
 	) => {
 		let players = await fetchControllers.getAllPlayers()
 		if (by_form) {
@@ -96,7 +106,7 @@ export default {
 		}
 		return players
 	},
-	player: async (_: unknown, { id }, { loaders }) => {
+	player: async (_: unknown, { id }: QueryPlayerArgs, { loaders }) => {
 		const player = await loaders.playerData.load(id)
 		return player
 	}
