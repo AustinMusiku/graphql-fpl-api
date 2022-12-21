@@ -40,26 +40,26 @@ The api should now be test it out by visiting [http://localhost:4500/graphql](ht
 Produces the following response:
 ```json
 {
-    "data": {
-        "player": {
-        "assists": 0,
-        "event_points": 0,
-        "first_name": "Mohamed",
-        "goals_scored": 0,
-        "points_per_game": "2.0",
-        "second_name": "Salah",
-        "total_points": 2,
-        "transfers_out_event": 0,
-        "transfers_in_event": 0,
-        "UpcomingFixtures": [
-            {
-            "difficulty": 3,
-            "event": 1,
-            "kickoff_time": "2018-08-11T11:30:00Z"
-            }
-        ]
+  "data": {
+    "player": {
+      "assists": 4,
+      "event_points": 2,
+      "first_name": "Mohamed",
+      "goals_scored": 6,
+      "points_per_game": 5.9,
+      "second_name": "Salah",
+      "total_points": 82,
+      "transfers_out_event": 191609,
+      "transfers_in_event": 284875,
+      "UpcomingFixtures": [
+        {
+          "difficulty": 2,
+          "event": 17,
+          "kickoff_time": "2022-12-26T17:30:00Z"
         }
+      ]
     }
+  }
 }
 ```
 
