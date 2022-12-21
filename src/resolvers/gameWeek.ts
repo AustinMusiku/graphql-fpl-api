@@ -1,11 +1,11 @@
 export default {
-	id: (gameweek) => gameweek.id,
-	highest_score: (gameweek) => gameweek.highest_score,
-	deadline_time: (gameweek) => gameweek.deadline_time,
-	finished: (gameweek) => gameweek.finished,
-	is_previous: (gameweek) => gameweek.is_previous,
-	is_current: (gameweek) => gameweek.is_current,
-	is_next: (gameweek) => gameweek.is_next,
-	avg_points: (gameweek) => gameweek.avg_points,
-	chip_plays: (gameweek) => gameweek.chip_plays
+	id: ({ id }) => id,
+	highest_score: ({ highest_score }) => highest_score,
+	deadline_time: ({ deadline_time }) => deadline_time,
+	finished: ({ finished }) => finished,
+	is_previous: ({ is_previous }) => is_previous,
+	is_current: ({ is_current }) => is_current,
+	is_next: ({ is_next }) => is_next,
+	avg_points: ({ average_entry_score }) => average_entry_score,
+	chip_plays: ({ chip_plays }) => chip_plays
 }

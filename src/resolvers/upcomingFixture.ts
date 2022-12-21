@@ -1,11 +1,11 @@
 export default {
-	id: (fixture) => fixture.id,
-	event: (fixture) => fixture.event,
-	minutes: (fixture) => fixture.minutes,
-	difficulty: (fixture) => fixture.difficulty,
-	team_h: (fixture) => fixture.team_h,
-	team_a: (fixture) => fixture.team_a,
-	finished: (fixture) => fixture.finished,
-	is_home: (fixture) => fixture.is_home,
-	kickoff_time: (fixture) => fixture.kickoff_time
+	id: ({ id }) => id,
+	event: ({ event }) => event,
+	minutes: ({ minutes }) => minutes,
+	difficulty: ({ difficulty }) => difficulty,
+	team_h: ({ team_h }) => team_h,
+	team_a: ({ team_a }) => team_a,
+	finished: ({ finished }) => finished,
+	is_home: ({ is_home }) => is_home,
+	kickoff_time: ({ kickoff_time }) => kickoff_time
 }

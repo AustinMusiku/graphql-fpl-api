@@ -4,21 +4,22 @@ export default {
 	gameweeks: async (_: unknown, { is_finished }) => {
 		let gws = await fetchControllers.gameWeeks()
 		if (is_finished) {
-			gws = gws.filter((gw) => gw.finished == true)
+			gws = gws.filter(({ finished }) => finished === true)
+		} else if (!is_finished) {
+			gws = gws.filter(({ finished }) => finished === false)
 		}
 		return gws
 	},
 	gameweek: async (_: unknown, { id, is_current, is_next }) => {
 		const gws = await fetchControllers.gameWeeks()
 		if (id) {
-			const gw = gws.filter((gw) => gw.id == id)
-			return gw[0]
-		} else if (is_current) {
-			const gw = gws.filter((gw) => gw.is_current == is_current)
-			return gw[0]
-		} else if (is_next) {
-			const gw = gws.filter((gw) => gw.is_next == is_next)
-			return gw[0]
+			return gws.find((gw) => gw.id === id)
+		}
+		if (is_current) {
+			return gws.find(({ is_current }) => is_current === true)
+		}
+		if (is_next) {
+			return gws.find(({ is_next }) => is_next === true)
 		}
 	},
 	players: async (
@@ -57,33 +58,37 @@ export default {
 		}
 		if (trim_extras) {
 			players = players.filter(
-				(p) =>
-					p.form != 0 &&
-					p.minutes > 45 &&
-					p.chance_of_playing_next_round != 0
+				({ form, minutes, chance_of_playing_next_round }) =>
+					form != 0 &&
+					minutes > 45 &&
+					chance_of_playing_next_round != 0
 			)
 		}
 		if (differentials) {
-			players = players.filter((p) => p.selected_by_percent < 12)
+			players = players.filter(
+				({ selected_by_percent }) => selected_by_percent < 12
+			)
 		}
 		if (captains) {
 			players = players.filter(
-				(p) =>
-					p.now_cost > 75 &&
-					p.chance_of_playing_next_round != 75 &&
-					p.chance_of_playing_next_round != 50 &&
-					p.chance_of_playing_next_round != 25
+				({ now_cost, chance_of_playing_next_round }) =>
+					now_cost > 75 &&
+					chance_of_playing_next_round != 75 &&
+					chance_of_playing_next_round != 50 &&
+					chance_of_playing_next_round != 25
 			)
 		}
 		if (premiums) {
-			players = players.filter((p) => p.now_cost > 99)
+			players = players.filter(({ now_cost }) => now_cost > 99)
 		}
 		if (mid_rangers) {
-			players = players.filter((p) => p.now_cost < 99 && p.now_cost > 66)
+			players = players.filter(
+				({ now_cost }) => now_cost < 99 && now_cost > 66
+			)
 		}
 		if (budgets) {
 			players = players
-				.filter((p) => p.now_cost < 66)
+				.filter(({ now_cost }) => now_cost < 66)
 				.sort((a, b) => b.form - a.form)
 		}
 		if (first) {
@@ -93,6 +98,6 @@ export default {
 	},
 	player: async (_: unknown, { id }, { loaders }) => {
 		const player = await loaders.playerData.load(id)
-		return player[0]
+		return player
 	}
 }

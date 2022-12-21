@@ -1,53 +1,70 @@
-import fetchControllers from '../controllers/fetchControllers'
+import { GraphQLError } from 'graphql'
 
 export default {
-	id: (player) => player.id,
-	code: (player) => player.code,
-	chance_of_playing_next_round: (player) =>
-		player.chance_of_playing_next_round,
-	cost_change_event: (player) => player.cost_change_event,
-	element_type: (player) => player.element_type,
-	event_points: (player) => player.event_points,
-	first_name: (player) => player.first_name,
-	second_name: (player) => player.second_name,
-	web_name: (player) => player.web_name,
-	news: (player) => player.news,
-	news_added: (player) => player.news_added,
-	now_cost: (player) => player.now_cost,
-	team: (player) => player.team,
-	total_points: (player) => player.total_points,
-	transfers_in_event: (player) => player.transfers_in_event,
-	transfers_out_event: (player) => player.transfers_out_event,
-	minutes: (player) => player.minutes,
-	goals_scored: (player) => player.goals_scored,
-	assists: (player) => player.assists,
-	saves: (player) => player.saves,
-	bonus: (player) => player.bonus,
-	bps: (player) => player.bps,
-	form: (player) => player.form,
-	points_per_game: (player) => player.points_per_game,
-	selected_by_percent: (player) => player.selected_by_percent,
-	influence: (player) => player.influence,
-	creativity: (player) => player.creativity,
-	threat: (player) => player.threat,
-	ict_index: (player) => player.ict_index,
-	UpcomingFixtures: async ({ id }, { gw, first, last }, { loaders }) => {
-		const playerUpcomingFixtures = loaders.playerEvent.loadMany([id])
-		const fixs = await playerUpcomingFixtures
+	id: ({ id }) => id,
+	code: ({ code }) => code,
+	chance_of_playing_next_round: ({ chance_of_playing_next_round }) =>
+		chance_of_playing_next_round,
+	cost_change_event: ({ cost_change_event }) => cost_change_event,
+	element_type: ({ element_type }) => element_type,
+	event_points: ({ event_points }) => event_points,
+	first_name: ({ first_name }) => first_name,
+	second_name: ({ second_name }) => second_name,
+	web_name: ({ web_name }) => web_name,
+	news: ({ news }) => news,
+	news_added: ({ news_added }) => news_added,
+	now_cost: ({ now_cost }) => now_cost,
+	team: ({ team }) => team,
+	total_points: ({ total_points }) => total_points,
+	transfers_in_event: ({ transfers_in_event }) => transfers_in_event,
+	transfers_out_event: ({ transfers_out_event }) => transfers_out_event,
+	minutes: ({ minutes }) => minutes,
+	goals_scored: ({ goals_scored }) => goals_scored,
+	assists: ({ assists }) => assists,
+	saves: ({ saves }) => saves,
+	bonus: ({ bonus }) => bonus,
+	bps: ({ bps }) => bps,
+	form: ({ form }) => form,
+	points_per_game: ({ points_per_game }) => points_per_game,
+	selected_by_percent: ({ selected_by_percent }) => selected_by_percent,
+	influence: ({ influence }) => influence,
+	creativity: ({ creativity }) => creativity,
+	threat: ({ threat }) => threat,
+	ict_index: ({ ict_index }) => ict_index,
+	UpcomingFixtures: async (
+		{ team },
+		{ gw, first, last, from, to },
+		{ loaders }
+	) => {
+		const playerUpcomingFixtures = loaders.teamUpcomingFixtures.load(team)
+		const fixtures = await playerUpcomingFixtures
 
 		if (gw) {
-			return fixs[0].fixtures.filter((fix) => fix.event == gw)
+			return fixtures.filter(({ event }) => event === gw)
 		}
-		if (first && last) {
-			return fixs[0].fixtures.filter(
-				(fix) => fix.event >= first && fix.event < last
-			)
+		if (first) {
+			return fixtures.slice(0, first)
+		}
+		if (last) {
+			return fixtures.slice(-last)
+		}
+		if (from || to) {
+			if (from > to) {
+				return new GraphQLError('from must be less than to')
+			}
+			if (!to) {
+				return fixtures.filter(({ event }) => event >= from)
+			}
+			if (!from) {
+				return fixtures.filter(({ event }) => event <= to)
+			}
+			return fixtures.filter(({ event }) => event >= from && event <= to)
 		}
 
-		return fixs[0].fixtures
+		return fixtures
 	},
-	pastFixtures: async ({ id }) => {
-		const playerEvents = await fetchControllers.getPlayerEventsById(id)
+	pastFixtures: async ({ id }, _, { loaders }) => {
+		const playerEvents = await loaders.playerEvent.load(id)
 		return playerEvents.history
 	}
 }

@@ -28,6 +28,12 @@ type Player {
 	creativity: Float
 	threat: Float
 	ict_index: Float
-	UpcomingFixtures(gw: Int, first: Int, last: Int): [UpcomingFixture]
+	UpcomingFixtures(
+		gw: Int
+		first: Int
+		last: Int
+		from: Int
+		to: Int
+	): [UpcomingFixture]
 	pastFixtures: [PastFixture]
 }

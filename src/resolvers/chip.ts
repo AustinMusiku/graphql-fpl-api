@@ -1,4 +1,4 @@
 export default {
-	chip_name: (chip) => chip.chip_name,
-	num_played: (chip) => chip.num_played
+	chip_name: ({ chip_name }) => chip_name,
+	num_played: ({ num_played }) => num_played
 }

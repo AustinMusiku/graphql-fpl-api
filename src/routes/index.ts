@@ -1,29 +1,15 @@
 import { Application } from 'express'
-import dataLoader from 'dataloader'
 import { createYoga } from 'graphql-yoga'
 
 import schemaWithResolvers from '../schema'
-import fetchControllers from '../controllers/fetchControllers'
+import { loaders } from '../loaders'
 
 class Routes {
 	public mountYoga(_express: Application): Application {
 		const yoga = createYoga({
 			schema: schemaWithResolvers,
 			context: {
-				loaders: {
-					playerEvent: new dataLoader(
-						async (keys: readonly number[]) => {
-							return keys.map(
-								fetchControllers.getPlayerEventsById
-							)
-						}
-					),
-					playerData: new dataLoader(
-						async (keys: readonly number[]) => {
-							return keys.map(fetchControllers.getPlayerDataById)
-						}
-					)
-				}
+				loaders
 			}
 		})
 		return _express.use('/graphql', yoga)
