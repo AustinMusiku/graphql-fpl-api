@@ -1,0 +1,11 @@
+type GameWeek {
+	id: Int
+	highest_score: Int
+	deadline_time: String
+	finished: Boolean
+	is_previous: Boolean
+	is_current: Boolean
+	is_next: Boolean
+	avg_points: Int
+	chip_plays: [Chip]
+}

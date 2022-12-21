@@ -1,0 +1,22 @@
+type PastFixture {
+	was_home: Boolean
+	opponent_team: Int
+	total_points: Int
+	team_h_score: Int
+	team_a_score: Int
+	round: Int
+	minutes: Int
+	goals_scored: Int
+	assists: Int
+	clean_sheets: Int
+	goals_conceded: Int
+	own_goals: Int
+	penalties_saved: Int
+	penalties_missed: Int
+	yellow_cards: Int
+	red_cards: Int
+	saves: Int
+	bps: Int
+	value: Int
+	selected: Int
+}
