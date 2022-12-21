@@ -166,7 +166,6 @@ const getPlayerDataById = async (playerId) => {
 	try {
 		let players = await getAllPlayers()
 		let player = players.find((player) => player.id == playerId)
-		console.log(player)
 		return player
 	} catch (err) {
 		console.log(err)
@@ -187,7 +186,6 @@ const getPlayersByTeam = async (teamId) => {
 
 const gameWeeks = async () => {
 	try {
-		console.log('fetching game weeks')
 		let general = myCache.get('general')
 		if (general) {
 			let gws = general.events
