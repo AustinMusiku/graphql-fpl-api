@@ -1,17 +1,21 @@
 import dataLoader from 'dataloader'
-import {
-	getPlayerEventsById,
-	getPlayerDataById,
-	getFixturesByTeam
-} from '../controllers/fetchControllers'
+import fetchController from '../controllers/fetchControllers'
 
-const loader = (controller) =>
+function loader(controller) {
 	new dataLoader(async (keys: readonly number[]) => {
 		return keys.map(controller)
 	})
+}
 
 export const loaders = {
-	playerEvent: loader(getPlayerEventsById),
-	playerData: loader(getPlayerDataById),
-	teamUpcomingFixtures: loader(getFixturesByTeam)
+	playerEvent: loader(fetchController.getPlayerEventsById),
+	teamUpcomingFixtures: loader(fetchController.getFixturesByTeam),
+	playerData: new dataLoader(async (keys: readonly number[]) => {
+		return keys.map(async (key) => {
+			return await fetchController.getPlayerDataById.call(
+				fetchController,
+				key
+			)
+		})
+	})
 }

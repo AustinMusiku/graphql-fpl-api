@@ -5,11 +5,11 @@ import {
 	QueryPlayersArgs,
 	QueryResolvers
 } from '../types/schema'
-import fetchControllers from '../controllers/fetchControllers'
+import fetchController from '../controllers/fetchControllers'
 
 export const Query: QueryResolvers = {
 	gameweeks: async (_: unknown, { is_finished }: QueryGameweeksArgs) => {
-		let gws = await fetchControllers.gameWeeks()
+		let gws = await fetchController.getGameWeeks()
 		if (is_finished) {
 			gws = gws.filter(({ finished }) => finished === true)
 		} else if (!is_finished) {
@@ -21,7 +21,7 @@ export const Query: QueryResolvers = {
 		_: unknown,
 		{ id, is_current, is_next }: QueryGameweekArgs
 	) => {
-		const gws = await fetchControllers.gameWeeks()
+		const gws = await fetchController.getGameWeeks()
 		if (id) {
 			return gws.find((gw) => gw.id === id)
 		}
@@ -47,7 +47,7 @@ export const Query: QueryResolvers = {
 			first
 		}: QueryPlayersArgs
 	) => {
-		let players = await fetchControllers.getAllPlayers()
+		let players = await fetchController.getAllPlayers()
 		if (by_form) {
 			players = players.sort((a, b) => b.form - a.form)
 		}

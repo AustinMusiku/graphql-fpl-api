@@ -1,27 +1,33 @@
-import * as mcache from 'memory-cache';
+import nodeCache from 'node-cache'
 
 class Cache {
-	/**
-	 * Checks for the available cached data
-	 * or adds if not available
-	 */
-	public cache(_duration: number): any {
-		return (req, res, next) => {
-			let key = '__express__' + req.originalUrl || req.url;
+	private static instance: Cache
 
-			let cachedBody = mcache.get(key);
-			if (cachedBody) {
-				res.send(cachedBody);
-			} else {
-				res.sendResponse = res.send;
-				res.send = (body) => {
-					mcache.put(key, body, _duration * 1000);
-					res.sendResponse(body);
-				};
-				next();
-			}
-		};
+	constructor() {
+		if (Cache.instance) {
+			throw new Error('Cache already exists')
+		}
+	}
+
+	public static getCache(): Cache {
+		if (Cache.instance) {
+			return Cache.instance
+		} else {
+			Cache.instance = new nodeCache({
+				stdTTL: parseInt(process.env.TTL || '172800'),
+				checkperiod: parseInt(process.env.CHECKPERIOD || '600')
+			})
+			return Cache.instance
+		}
+	}
+
+	get(key: string) {
+		return Cache.instance.get(key)
+	}
+
+	set(key: string, value: string) {
+		Cache.instance.set(key, value)
 	}
 }
 
-export default new Cache;
+export default Cache.getCache()
