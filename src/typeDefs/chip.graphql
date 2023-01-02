@@ -1,4 +1,0 @@
-type Chip {
-	chip_name: String
-	num_played: Int
-}
