@@ -1,4 +1,9 @@
 import { GraphQLResolveInfo } from 'graphql';
+import { GameWeek as GameWeekModel } from '@/models/gameWeek';
+import { Chip as ChipModel } from '@/models/chip';
+import { Player as PlayerModel } from '@/models/player';
+import { PastFixture as PastFixtureModel } from '@/models/pastFixture';
+import { UpcomingFixture as UpcomingFixtureModel } from '@/models/upcomingFixture';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -222,29 +227,29 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
-  Chip: ResolverTypeWrapper<../models/chip>;
+  Chip: ResolverTypeWrapper<ChipModel>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
-  GameWeek: ResolverTypeWrapper<../models/gameWeek>;
+  GameWeek: ResolverTypeWrapper<GameWeekModel>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
-  PastFixture: ResolverTypeWrapper<../models/pastFixture>;
-  Player: ResolverTypeWrapper<../models/player>;
+  PastFixture: ResolverTypeWrapper<PastFixtureModel>;
+  Player: ResolverTypeWrapper<PlayerModel>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
-  UpcomingFixture: ResolverTypeWrapper<../models/upcomingFixture>;
+  UpcomingFixture: ResolverTypeWrapper<UpcomingFixtureModel>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
-  Chip: ../models/chip;
+  Chip: ChipModel;
   Float: Scalars['Float'];
-  GameWeek: ../models/gameWeek;
+  GameWeek: GameWeekModel;
   Int: Scalars['Int'];
-  PastFixture: ../models/pastFixture;
-  Player: ../models/player;
+  PastFixture: PastFixtureModel;
+  Player: PlayerModel;
   Query: {};
   String: Scalars['String'];
-  UpcomingFixture: ../models/upcomingFixture;
+  UpcomingFixture: UpcomingFixtureModel;
 };
 
 export type ChipResolvers<ContextType = any, ParentType extends ResolversParentTypes['Chip'] = ResolversParentTypes['Chip']> = {

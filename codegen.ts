@@ -4,15 +4,16 @@ const config: CodegenConfig = {
 	overwrite: true,
 	schema: './src/typeDefs/*.graphql',
 	generates: {
-		'src/types/schema.d.ts': {
+		'src/types/schema.ts': {
 			plugins: ['typescript', 'typescript-resolvers'],
 			config: {
+				mapperTypeSuffix: 'Model',
 				mappers: {
-					GameWeek: '../models/gameWeek',
-					Chip: '../models/chip',
-					Player: '../models/player',
-					PastFixture: '../models/pastFixture',
-					UpcomingFixture: '../models/upcomingFixture'
+					GameWeek: '@/models/gameWeek#GameWeek',
+					Chip: '@/models/chip#Chip',
+					Player: '@/models/player#Player',
+					PastFixture: '@/models/pastFixture#PastFixture',
+					UpcomingFixture: '@/models/upcomingFixture#UpcomingFixture'
 				}
 			}
 		}
