@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: fplfriend-api
   labels:
-        app: fplfriend
+    app: fplfriend
 spec:
   selector:
     app: api
