@@ -66,11 +66,7 @@ jobs:
       # Create namespace if it doesn't exist already
       - name: Create namespace
         run: |
-          namespacePresent=`kubectl get namespace | grep fplfriend | wc -l`
-          if [ $namespacePresent -eq 0 ]
-          then
-              echo `kubectl create namespace fplfriend`
-          fi
+          kubectl create namespace fplfriend || true
 
       # Creates a secret for your Azure Container Registry 
       - uses: azure/k8s-create-secret@v1
