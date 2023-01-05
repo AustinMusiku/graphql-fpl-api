@@ -73,7 +73,7 @@ jobs:
             echo `kubectl create namespace fplfriend`
         fi
 
-      # Creates a secret for your Azure Container Registry
+      # Creates a secret for your Azure Container Registry 
       - uses: azure/k8s-create-secret@v1
         with:
           namespace: fplfriend
