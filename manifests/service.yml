@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: "fplfriend-0fcc"
+    labels:
+        app: "fplfriend-0fcc"
+spec:
+    type: LoadBalancer
+    ports:
+    - port: 4500
+      targetPort: 4500
+      protocol: TCP
+      name: http
+    selector:
+        app: "fplfriend-0fcc"
