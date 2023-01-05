@@ -11,7 +11,7 @@ env:
   RESOURCE_GROUP: fplfriend
   CLUSTER_NAME: fplfriend
   DEPLOYMENT_MANIFEST_PATH: | 
-    ./manifests/fplfriend-api.yaml
+    ./manifests/fplfriend-api.yml
 
 jobs:
   buildImage:
