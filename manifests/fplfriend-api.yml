@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fplfriend
+  labels:
+    app: fplfriend
+spec:
+  type: LoadBalancer
+  selector:
+    app: fplfriend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 4500
+    name: http
+
+---
+
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: "fplfriend"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: "fplfriend"
+  template:
+    metadata:
+      labels:
+        app: "fplfriend"
+    spec:
+      containers:
+        - name: "fplfriend"
+          image: "fplfriend.azurecr.io/fplfriend"
+          ports:
+          - containerPort: 4500
