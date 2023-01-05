@@ -1,32 +1,3 @@
-# This workflow will build and push an application to a Azure Kubernetes Service (AKS) cluster when you push your code
-#
-# This workflow assumes you have already created the target AKS cluster and have created an Azure Container Registry (ACR)
-# The ACR should be attached to the AKS cluster
-# For instructions see:
-#   - https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal
-#   - https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-portal
-#   - https://learn.microsoft.com/en-us/azure/aks/cluster-container-registry-integration?tabs=azure-cli#configure-acr-integration-for-existing-aks-clusters
-#   - https://github.com/Azure/aks-create-action
-#
-# To configure this workflow:
-#
-# 1. Set the following secrets in your repository (instructions for getting these can be found at https://docs.microsoft.com/en-us/azure/developer/github/connect-from-azure?tabs=azure-cli%2Clinux):
-#    - AZURE_CLIENT_ID
-#    - AZURE_TENANT_ID
-#    - AZURE_SUBSCRIPTION_ID
-#
-# 2. Set the following environment variables (or replace the values below):
-#    - AZURE_CONTAINER_REGISTRY (name of your container registry / ACR)
-#    - RESOURCE_GROUP (where your cluster is deployed)
-#    - CLUSTER_NAME (name of your AKS cluster)
-#    - CONTAINER_NAME (name of the container image you would like to push up to your ACR)
-#    - IMAGE_PULL_SECRET_NAME (name of the ImagePullSecret that will be created to pull your ACR image)
-#    - DEPLOYMENT_MANIFEST_PATH (path to the manifest yaml for your deployment)
-#
-# For more information on GitHub Actions for Azure, refer to https://github.com/Azure/Actions
-# For more samples to get started with GitHub Action workflows to deploy to Azure, refer to https://github.com/Azure/actions-workflow-samples
-# For more options with the actions used below please refer to https://github.com/Azure/login
-
 name: Build and deploy an app to AKS
 
 on:
@@ -40,7 +11,7 @@ env:
   RESOURCE_GROUP: fplfriend
   CLUSTER_NAME: fplfriend
   DEPLOYMENT_MANIFEST_PATH: | 
-    ./deployment/fplfriend-api.yaml
+    ./manifests/fplfriend-api.yaml
 
 jobs:
   buildImage:
@@ -91,11 +62,30 @@ jobs:
           resource-group: ${{ env.RESOURCE_GROUP }}
           cluster-name: ${{ env.CLUSTER_NAME }}
 
+      # Creates a namespace if it doesn't already exist
+      - name: Create namespace
+        run: |
+          namespacePresent=`kubectl get namespace | grep fplfriend8504 | wc -l`
+          if [ $namespacePresent -eq 0 ]
+          then
+              echo `kubectl create namespace fplfriend8504`
+          fi
+      - uses: azure/k8s-create-secret@v1
+        with:
+          namespace: fplfriend8504
+          container-registry-url: fplfriend.azurecr.io
+          container-registry-username: ${{ secrets.acr_fplfriend_username }}
+          container-registry-password: ${{ secrets.acr_fplfriend_password }}
+          secret-name: fplfrienddockerauth
+
       # Deploys application based on given manifest file
       - name: Deploys application
         uses: Azure/k8s-deploy@v4
         with:
           action: deploy
+          namespace: fplfriend8504
           manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
           images: |
             ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}
+          imagepullsecrets: |
+            fplfrienddockerauth
