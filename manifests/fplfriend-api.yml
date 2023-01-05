@@ -21,7 +21,7 @@ kind: Deployment
 metadata:
   name: "fplfriend"
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: "fplfriend"
