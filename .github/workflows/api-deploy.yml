@@ -6,10 +6,10 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_CONTAINER_REGISTRY: fplfriend
+  AZURE_CONTAINER_REGISTRY: fplfriendreg
   CONTAINER_NAME: fplfriend-api
-  RESOURCE_GROUP: fplfriend
-  CLUSTER_NAME: fplfriend
+  RESOURCE_GROUP: fplfriendrg
+  CLUSTER_NAME: fplfriendcl
   DEPLOYMENT_MANIFEST_PATH: | 
     ./manifests/fplfriend-api.yml
 
@@ -42,25 +42,25 @@ jobs:
       # Create namespace if it doesn't exist already
       - name: Create namespace
         run: |
-          kubectl create namespace fplfriend || true
+          kubectl create namespace fplfriendns || true
 
       # Creates a secret for your Azure Container Registry 
       - uses: azure/k8s-create-secret@v1
         with:
-          namespace: fplfriend
+          namespace: fplfriendns
           container-registry-url: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io
           container-registry-username: ${{ secrets.acr_fplfriend_username }}
           container-registry-password: ${{ secrets.acr_fplfriend_password }}
-          secret-name: fplfrienddockerauth
+          secret-name: fplfriendauth
 
       # Deploys application based on given manifest file
       - name: Deploys application
         uses: Azure/k8s-deploy@v4
         with:
           action: deploy
-          namespace: fplfriend
+          namespace: fplfriendns
           manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
           images: |
-            ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}
+            ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}
           image-pull-secrets: |
-            fplfrienddockerauth
+            fplfriendauth
