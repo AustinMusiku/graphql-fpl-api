@@ -1,4 +1,4 @@
-name: Build and deploy an app to AKS
+name: Build and deploy to Azure Kubernetes Service
 
 on:
   push:
