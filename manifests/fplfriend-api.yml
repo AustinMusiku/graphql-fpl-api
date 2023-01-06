@@ -32,6 +32,6 @@ spec:
     spec:
       containers:
         - name: "fplfriend"
-          image: "fplfriend.azurecr.io/fplfriend"
+          image: "fplfriendreg.azurecr.io/fplfriend-api"
           ports:
           - containerPort: 4500
