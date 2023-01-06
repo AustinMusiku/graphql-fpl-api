@@ -6,18 +6,20 @@ import { loaders } from '../loaders'
 
 class Routes {
 	// default route
-	public default(_express: Application): Application {
+	public mountDefault(_express: Application): Application {
 		return _express.get('/', (req, res) => {
 			// return html page with link to graphql playground
 			res.send(`
-				<h1>GraphQL Playground</h1>
+				<h1>Fplfriend</h1>
 				<a href="/graphql">Click here to go to GraphQL Playground</a>
+				<p>For more information, visit <a href="https://www.github.com/austinmusiku/fplfriend-api">github repo</a></p>
 			`)
 		})
 	}
 
 	public mountYoga(_express: Application): Application {
 		const yoga = createYoga({
+			graphiql: process.env.NODE_ENV === 'development' ? true : false,
 			schema: schema,
 			context: {
 				loaders

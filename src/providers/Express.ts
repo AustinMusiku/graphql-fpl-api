@@ -25,6 +25,7 @@ class Express {
 
 	private mountRoutes(): void {
 		this.express = Routes.mountYoga(this.express)
+		this.express = Routes.mountDefault(this.express)
 	}
 
 	public init(): any {
