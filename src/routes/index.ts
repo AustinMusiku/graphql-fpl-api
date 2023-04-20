@@ -19,7 +19,7 @@ class Routes {
 
 	public mountYoga(_express: Application): Application {
 		const yoga = createYoga({
-			graphiql: process.env.NODE_ENV === 'development' ? true : false,
+			graphiql: true,
 			schema: schema,
 			context: {
 				loaders
