@@ -1,6 +1,6 @@
 FROM node:alpine AS builder
 
-WORKDIR /app
+WORKDIR /usr/src/fplfriendapi
 
 COPY package.json ./
 COPY yarn.lock ./
@@ -14,13 +14,15 @@ RUN yarn build
 
 FROM node:alpine AS runner
 
-WORKDIR /app
+WORKDIR /usr/src/fplfriendapi
 
-COPY package*.json ./
+COPY package.json ./
+COPY yarn.lock ./
 
 RUN yarn install --production
 
-COPY --from=builder /app/dist ./dist
+COPY --from=builder usr/src/fplfriendapi/public ./public
+COPY --from=builder usr/src/fplfriendapi/dist ./dist
 
 EXPOSE 4500
 
