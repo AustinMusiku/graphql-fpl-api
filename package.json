@@ -5,7 +5,7 @@
 	"description": "fplfriend api",
 	"main": "src/index.ts",
 	"scripts": {
-		"start": "pm2 start ecosystem.config.js --env production",
+		"start": "pm2 start ecosystem.config.js --env production && tail -f /dev/null",
 		"dev": "concurrently \"cross-env NODE_ENV=development nodemon src/index.ts\" \"yarn codegen --watch\"",
 		"build": "tsc",
 		"lint": "eslint --ext .ts src",
