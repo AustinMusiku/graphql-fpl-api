@@ -25,7 +25,7 @@ RUN yarn global add pm2
 
 COPY --from=builder ./public ./public
 COPY --from=builder ./dist ./dist
-COPY --from=builder ecosystem.config.js ./
+COPY --from=builder ./ecosystem.config.js ./
 
 EXPOSE 4500
 
