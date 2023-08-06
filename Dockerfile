@@ -21,8 +21,8 @@ COPY yarn.lock ./
 
 RUN yarn install --production
 
-COPY --from=builder ./public ./public
-COPY --from=builder ./dist ./dist
+COPY --from=builder usr/src/fplfriendapi/public ./public
+COPY --from=builder usr/src/fplfriendapi/dist ./dist
 
 EXPOSE 4500
 
