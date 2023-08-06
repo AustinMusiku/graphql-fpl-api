@@ -21,8 +21,6 @@ COPY yarn.lock ./
 
 RUN yarn install --production
 
-RUN yarn global add pm2
-
 COPY --from=builder ./public ./public
 COPY --from=builder ./dist ./dist
 
