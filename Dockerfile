@@ -21,10 +21,12 @@ COPY yarn.lock ./
 
 RUN yarn install --production
 
+RUN yarn global add pm2
+
 COPY --from=builder usr/src/fplfriendapi/public ./public
 COPY --from=builder usr/src/fplfriendapi/dist ./dist
 COPY --from=builder usr/src/fplfriendapi/ecosystem.config.js ./
 
 EXPOSE 4500
 
-CMD ["yarn" , "start"]
+CMD ["yarn", "start:pm2"]
