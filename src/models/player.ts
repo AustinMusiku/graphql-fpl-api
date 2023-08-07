@@ -58,10 +58,10 @@ export type Player = {
 	yellow_cards: number
 	red_cards: number
 	starts: number
-	expected_goals: string
-	expected_assists: string
-	expected_goal_involvements: string
-	expected_goals_conceded: string
+	expected_goals: number
+	expected_assists: number
+	expected_goal_involvements: number
+	expected_goals_conceded: number
 	influence_rank: number
 	influence_rank_type: number
 	creativity_rank: number
