@@ -2,30 +2,21 @@ FROM node:alpine AS builder
 
 WORKDIR /usr/src/fplfriendapi
 
-COPY package.json ./
-COPY yarn.lock ./
-
-RUN yarn install
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
 
 COPY . .
-
 RUN yarn build
 
+FROM node:alpine
 
-FROM node:alpine AS runner
+COPY package.json yarn.lock ./
+RUN yarn install --production --frozen-lockfile && yarn global add pm2
 
-WORKDIR /usr/src/fplfriendapi
+COPY /public ./public
+COPY ecosystem.config.js ./
 
-COPY package.json ./
-COPY yarn.lock ./
-
-RUN yarn install --production
-
-RUN yarn global add pm2
-
-COPY --from=builder usr/src/fplfriendapi/public ./public
-COPY --from=builder usr/src/fplfriendapi/dist ./dist
-COPY --from=builder usr/src/fplfriendapi/ecosystem.config.js ./
+COPY --from=builder /usr/src/fplfriendapi/dist ./dist
 
 EXPOSE 4500
 
