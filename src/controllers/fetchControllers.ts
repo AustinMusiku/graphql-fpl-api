@@ -188,6 +188,16 @@ class FetchController {
 			console.log(err)
 		}
 	}
+
+	async getTeamById(teamId: number) {
+		try {
+			const teams = await this.getTeams()
+			const team = teams.find((team) => team.id == teamId)
+			return team
+		} catch (err) {
+			console.log(err)
+		}
+	}
 }
 
 export default new FetchController()

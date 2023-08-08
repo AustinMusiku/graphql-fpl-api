@@ -15,6 +15,7 @@ export const typeDefs = /* GraphQL */ `
 		): [Player]
 		gameweek(id: Int, is_current: Boolean, is_next: Boolean): GameWeek
 		gameweeks(is_finished: Boolean): [GameWeek]
+		team(id: Int): Team
 		teams: [Team]
 	}
 
