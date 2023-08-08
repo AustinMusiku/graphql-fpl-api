@@ -73,6 +73,8 @@ export type Player = {
   cost_change_event?: Maybe<Scalars['Int']>;
   creativity?: Maybe<Scalars['Float']>;
   element_type?: Maybe<Scalars['Int']>;
+  ep_next?: Maybe<Scalars['Float']>;
+  ep_this?: Maybe<Scalars['Float']>;
   event_points?: Maybe<Scalars['Int']>;
   expected_assists?: Maybe<Scalars['Float']>;
   expected_goal_involvements?: Maybe<Scalars['Float']>;
@@ -342,6 +344,8 @@ export type PlayerResolvers<ContextType = any, ParentType extends ResolversParen
   cost_change_event?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   creativity?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   element_type?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  ep_next?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
+  ep_this?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   event_points?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   expected_assists?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   expected_goal_involvements?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;

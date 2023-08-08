@@ -37,6 +37,8 @@ export const Player: PlayerResolvers = {
 		expected_goal_involvements,
 	expected_goals_conceded: ({ expected_goals_conceded }) =>
 		expected_goals_conceded,
+	ep_next: ({ ep_next }) => (ep_next ? parseFloat(ep_next) : null),
+	ep_this: ({ ep_this }) => (ep_this ? parseFloat(ep_this) : null),
 	team: async ({ team }, _, { loaders }) => {
 		const teamData = await loaders.teamData.load(team)
 		return teamData

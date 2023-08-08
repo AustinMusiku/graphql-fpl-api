@@ -93,6 +93,8 @@ export const typeDefs = /* GraphQL */ `
 		expected_assists: Float
 		expected_goal_involvements: Float
 		expected_goals_conceded: Float
+		ep_next: Float
+		ep_this: Float
 		UpcomingFixtures(
 			gw: Int
 			first: Int
