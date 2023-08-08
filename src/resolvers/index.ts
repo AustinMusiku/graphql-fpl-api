@@ -4,6 +4,7 @@ import { Player } from './player'
 import { GameWeek } from './gameWeek'
 import { PastFixture } from './pastFixture'
 import { UpcomingFixture } from './upcomingFixture'
+import { Team } from './team'
 
 export default {
 	Query,
@@ -11,5 +12,6 @@ export default {
 	Player,
 	GameWeek,
 	PastFixture,
-	UpcomingFixture
+	UpcomingFixture,
+	Team
 }

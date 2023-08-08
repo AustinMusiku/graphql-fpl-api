@@ -109,5 +109,9 @@ export const Query: QueryResolvers = {
 	player: async (_: unknown, { id }: QueryPlayerArgs, { loaders }) => {
 		const player = await loaders.playerData.load(id)
 		return player
+	},
+	teams: async () => {
+		const teams = await fetchController.getTeams()
+		return teams
 	}
 }

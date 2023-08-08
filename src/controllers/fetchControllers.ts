@@ -168,6 +168,26 @@ class FetchController {
 			console.log(err)
 		}
 	}
+
+	async getTeams() {
+		try {
+			const general = cache.get('general')
+			if (!general) {
+				console.log('miss')
+				const url = urls.general
+				const response = await fetch(url, {
+					headers: {
+						'User-Agent': 'XXXXXX'
+					}
+				})
+				const general = await response.json()
+				cache.set('general', general)
+			}
+			return general.teams
+		} catch (err) {
+			console.log(err)
+		}
+	}
 }
 
 export default new FetchController()
