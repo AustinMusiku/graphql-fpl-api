@@ -72,7 +72,7 @@ export const typeDefs = /* GraphQL */ `
 		news: String
 		news_added: String
 		now_cost: Float
-		team: Int
+		team: Team
 		total_points: Int
 		transfers_in_event: Int
 		transfers_out_event: Int
