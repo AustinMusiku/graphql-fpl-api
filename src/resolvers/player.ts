@@ -15,7 +15,6 @@ export const Player: PlayerResolvers = {
 	news: ({ news }) => news,
 	news_added: ({ news_added }) => news_added,
 	now_cost: ({ now_cost }) => now_cost,
-	team: ({ team }) => team,
 	total_points: ({ total_points }) => total_points,
 	transfers_in_event: ({ transfers_in_event }) => transfers_in_event,
 	transfers_out_event: ({ transfers_out_event }) => transfers_out_event,
@@ -38,6 +37,10 @@ export const Player: PlayerResolvers = {
 		expected_goal_involvements,
 	expected_goals_conceded: ({ expected_goals_conceded }) =>
 		expected_goals_conceded,
+	team: async ({ team }, _, { loaders }) => {
+		const teamData = await loaders.teamData.load(team)
+		return teamData
+	},
 	UpcomingFixtures: async (
 		{ team },
 		{ gw, first, last, from, to },

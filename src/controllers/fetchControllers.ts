@@ -168,6 +168,36 @@ class FetchController {
 			console.log(err)
 		}
 	}
+
+	async getTeams() {
+		try {
+			const general = cache.get('general')
+			if (!general) {
+				console.log('miss')
+				const url = urls.general
+				const response = await fetch(url, {
+					headers: {
+						'User-Agent': 'XXXXXX'
+					}
+				})
+				const general = await response.json()
+				cache.set('general', general)
+			}
+			return general.teams
+		} catch (err) {
+			console.log(err)
+		}
+	}
+
+	async getTeamById(teamId: number) {
+		try {
+			const teams = await this.getTeams()
+			const team = teams.find((team) => team.id == teamId)
+			return team
+		} catch (err) {
+			console.log(err)
+		}
+	}
 }
 
 export default new FetchController()

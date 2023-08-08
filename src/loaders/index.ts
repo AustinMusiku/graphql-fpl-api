@@ -25,5 +25,18 @@ export const loaders = {
 				key
 			)
 		})
+	}),
+	teamData: new dataLoader(async (keys: readonly number[]) => {
+		return keys.map(async (key) => {
+			return await fetchController.getTeamById.call(fetchController, key)
+		})
+	}),
+	teamPlayers: new dataLoader(async (keys: readonly number[]) => {
+		return keys.map(async (key) => {
+			return await fetchController.getPlayersByTeam.call(
+				fetchController,
+				key
+			)
+		})
 	})
 }
