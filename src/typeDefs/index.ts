@@ -134,5 +134,6 @@ export const typeDefs = /* GraphQL */ `
 		strength_defence_home: Int
 		strength_defence_away: Int
 		pulse_id: Int
+		players: [Player]
 	}
 `

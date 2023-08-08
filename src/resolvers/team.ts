@@ -18,5 +18,9 @@ export const Team: TeamResolvers = {
 	strength_attack_away: ({ strength_attack_away }) => strength_attack_away,
 	strength_defence_home: ({ strength_defence_home }) => strength_defence_home,
 	strength_defence_away: ({ strength_defence_away }) => strength_defence_away,
-	pulse_id: ({ pulse_id }) => pulse_id
+	pulse_id: ({ pulse_id }) => pulse_id,
+	players: async ({ id }, _, { loaders }) => {
+		const teamPlayers = await loaders.teamPlayers.load(id)
+		return teamPlayers
+	}
 }
