@@ -87,6 +87,10 @@ export const typeDefs = /* GraphQL */ `
 		creativity: Float
 		threat: Float
 		ict_index: Float
+		expected_goals: Float
+		expected_assists: Float
+		expected_goal_involvements: Float
+		expected_goals_conceded: Float
 		UpcomingFixtures(
 			gw: Int
 			first: Int

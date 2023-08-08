@@ -32,6 +32,12 @@ export const Player: PlayerResolvers = {
 	creativity: ({ creativity }) => creativity,
 	threat: ({ threat }) => threat,
 	ict_index: ({ ict_index }) => ict_index,
+	expected_goals: ({ expected_goals }) => expected_goals,
+	expected_assists: ({ expected_assists }) => expected_assists,
+	expected_goal_involvements: ({ expected_goal_involvements }) =>
+		expected_goal_involvements,
+	expected_goals_conceded: ({ expected_goals_conceded }) =>
+		expected_goals_conceded,
 	UpcomingFixtures: async (
 		{ team },
 		{ gw, first, last, from, to },
