@@ -13,7 +13,8 @@ const config: CodegenConfig = {
 					Chip: '@/models/chip#Chip',
 					Player: '@/models/player#Player',
 					PastFixture: '@/models/pastFixture#PastFixture',
-					UpcomingFixture: '@/models/upcomingFixture#UpcomingFixture'
+					UpcomingFixture: '@/models/upcomingFixture#UpcomingFixture',
+					Team: '@/models/team#Team'
 				}
 			}
 		}

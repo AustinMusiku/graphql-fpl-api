@@ -15,6 +15,7 @@ export const typeDefs = /* GraphQL */ `
 		): [Player]
 		gameweek(id: Int, is_current: Boolean, is_next: Boolean): GameWeek
 		gameweeks(is_finished: Boolean): [GameWeek]
+		teams: [Team]
 	}
 
 	type Chip {
@@ -111,5 +112,26 @@ export const typeDefs = /* GraphQL */ `
 		finished: Boolean
 		is_home: Boolean
 		kickoff_time: String
+	}
+
+	type Team {
+		code: Int
+		draw: Int
+		id: Int
+		loss: Int
+		name: String
+		played: Int
+		points: Int
+		position: Int
+		short_name: String
+		strength: Int
+		win: Int
+		strength_overall_home: Int
+		strength_overall_away: Int
+		strength_attack_home: Int
+		strength_attack_away: Int
+		strength_defence_home: Int
+		strength_defence_away: Int
+		pulse_id: Int
 	}
 `
