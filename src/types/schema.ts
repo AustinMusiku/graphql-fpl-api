@@ -131,6 +131,7 @@ export type PlayerUpcomingFixturesArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  element_types?: Maybe<Array<Maybe<ElementType>>>;
   gameweek?: Maybe<GameWeek>;
   gameweeks?: Maybe<Array<Maybe<GameWeek>>>;
   player?: Maybe<Player>;
@@ -411,6 +412,7 @@ export type PlayerResolvers<ContextType = any, ParentType extends ResolversParen
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  element_types?: Resolver<Maybe<Array<Maybe<ResolversTypes['ElementType']>>>, ParentType, ContextType>;
   gameweek?: Resolver<Maybe<ResolversTypes['GameWeek']>, ParentType, ContextType, Partial<QueryGameweekArgs>>;
   gameweeks?: Resolver<Maybe<Array<Maybe<ResolversTypes['GameWeek']>>>, ParentType, ContextType, Partial<QueryGameweeksArgs>>;
   player?: Resolver<Maybe<ResolversTypes['Player']>, ParentType, ContextType, Partial<QueryPlayerArgs>>;

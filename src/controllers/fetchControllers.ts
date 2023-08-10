@@ -198,6 +198,37 @@ class FetchController {
 			console.log(err)
 		}
 	}
+
+	async getElementTypes() {
+		try {
+			const general = cache.get('general')
+			if (!general) {
+				const url = urls.general
+				const response = await fetch(url, {
+					headers: {
+						'User-Agent': 'XXXXXX'
+					}
+				})
+				const general = await response.json()
+				cache.set('general', general)
+			}
+			return general.element_types
+		} catch (err) {
+			console.log(err)
+		}
+	}
+
+	async getElementTypeById(elementTypeId: number) {
+		try {
+			const elementTypes = await this.getElementTypes()
+			const elementType = elementTypes.find(
+				(elementType) => elementType.id == elementTypeId
+			)
+			return elementType
+		} catch (err) {
+			console.log(err)
+		}
+	}
 }
 
 export default new FetchController()

@@ -17,6 +17,7 @@ export const typeDefs = /* GraphQL */ `
 		gameweeks(is_finished: Boolean): [GameWeek]
 		team(id: Int): Team
 		teams: [Team]
+		element_types: [ElementType]
 	}
 
 	type Chip {
