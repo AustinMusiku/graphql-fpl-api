@@ -17,6 +17,7 @@ export const typeDefs = /* GraphQL */ `
 		gameweeks(is_finished: Boolean): [GameWeek]
 		team(id: Int): Team
 		teams: [Team]
+		element_types: [ElementType]
 	}
 
 	type Chip {
@@ -65,7 +66,7 @@ export const typeDefs = /* GraphQL */ `
 		chance_of_playing_next_round: Int
 		chance_of_playing_this_round: Int
 		cost_change_event: Int
-		element_type: Int
+		element_type: ElementType
 		event_points: Int
 		first_name: String
 		second_name: String
@@ -138,5 +139,19 @@ export const typeDefs = /* GraphQL */ `
 		strength_defence_away: Int
 		pulse_id: Int
 		players: [Player]
+	}
+
+	type ElementType {
+		id: Int
+		plural_name: String
+		plural_name_short: String
+		singular_name: String
+		singular_name_short: String
+		squad_select: Int
+		squad_min_play: Int
+		squad_max_play: Int
+		ui_shirt_specific: Boolean
+		sub_positions_locked: [Int]
+		element_count: Int
 	}
 `

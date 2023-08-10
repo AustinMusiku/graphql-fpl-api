@@ -5,6 +5,7 @@ import { GameWeek } from './gameWeek'
 import { PastFixture } from './pastFixture'
 import { UpcomingFixture } from './upcomingFixture'
 import { Team } from './team'
+import { ElementType } from './ElementType'
 
 export default {
 	Query,
@@ -13,5 +14,6 @@ export default {
 	GameWeek,
 	PastFixture,
 	UpcomingFixture,
-	Team
+	Team,
+	ElementType
 }

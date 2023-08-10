@@ -9,7 +9,6 @@ export const Player: PlayerResolvers = {
 	chance_of_playing_this_round: ({ chance_of_playing_this_round }) =>
 		chance_of_playing_this_round,
 	cost_change_event: ({ cost_change_event }) => cost_change_event,
-	element_type: ({ element_type }) => element_type,
 	event_points: ({ event_points }) => event_points,
 	first_name: ({ first_name }) => first_name,
 	second_name: ({ second_name }) => second_name,
@@ -41,6 +40,10 @@ export const Player: PlayerResolvers = {
 		expected_goals_conceded,
 	ep_next: ({ ep_next }) => (ep_next ? parseFloat(ep_next) : null),
 	ep_this: ({ ep_this }) => (ep_this ? parseFloat(ep_this) : null),
+	element_type: ({ element_type }, _, { loaders }) => {
+		const elementTypeData = loaders.elementTypeData.load(element_type)
+		return elementTypeData
+	},
 	team: async ({ team }, _, { loaders }) => {
 		const teamData = await loaders.teamData.load(team)
 		return teamData

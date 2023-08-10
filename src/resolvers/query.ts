@@ -113,5 +113,9 @@ export const Query: QueryResolvers = {
 	team: async (_: unknown, { id }: { id: number }, { loaders }) => {
 		const teams = await loaders.teamData.load(id)
 		return teams
+	},
+	element_types: async () => {
+		const elementTypes = await fetchController.getElementTypes()
+		return elementTypes
 	}
 }
