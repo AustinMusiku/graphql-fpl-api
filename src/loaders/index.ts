@@ -38,5 +38,13 @@ export const loaders = {
 				key
 			)
 		})
+	}),
+	elementTypeData: new dataLoader(async (keys: readonly number[]) => {
+		return keys.map(async (key) => {
+			return await fetchController.getElementTypeById.call(
+				fetchController,
+				key
+			)
+		})
 	})
 }

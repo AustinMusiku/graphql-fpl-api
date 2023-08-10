@@ -89,7 +89,7 @@ export type Player = {
   code?: Maybe<Scalars['Int']>;
   cost_change_event?: Maybe<Scalars['Int']>;
   creativity?: Maybe<Scalars['Float']>;
-  element_type?: Maybe<Scalars['Int']>;
+  element_type?: Maybe<ElementType>;
   ep_next?: Maybe<Scalars['Float']>;
   ep_this?: Maybe<Scalars['Float']>;
   event_points?: Maybe<Scalars['Int']>;
@@ -379,7 +379,7 @@ export type PlayerResolvers<ContextType = any, ParentType extends ResolversParen
   code?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   cost_change_event?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   creativity?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
-  element_type?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  element_type?: Resolver<Maybe<ResolversTypes['ElementType']>, ParentType, ContextType>;
   ep_next?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   ep_this?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
   event_points?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
