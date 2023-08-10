@@ -63,6 +63,7 @@ export const typeDefs = /* GraphQL */ `
 		id: Int
 		code: Int
 		chance_of_playing_next_round: Int
+		chance_of_playing_this_round: Int
 		cost_change_event: Int
 		element_type: Int
 		event_points: Int

@@ -6,6 +6,8 @@ export const Player: PlayerResolvers = {
 	code: ({ code }) => code,
 	chance_of_playing_next_round: ({ chance_of_playing_next_round }) =>
 		chance_of_playing_next_round,
+	chance_of_playing_this_round: ({ chance_of_playing_this_round }) =>
+		chance_of_playing_this_round,
 	cost_change_event: ({ cost_change_event }) => cost_change_event,
 	element_type: ({ element_type }) => element_type,
 	event_points: ({ event_points }) => event_points,
