@@ -14,7 +14,8 @@ const config: CodegenConfig = {
 					Player: '@/models/player#Player',
 					PastFixture: '@/models/pastFixture#PastFixture',
 					UpcomingFixture: '@/models/upcomingFixture#UpcomingFixture',
-					Team: '@/models/team#Team'
+					Team: '@/models/team#Team',
+					ElementType: '@/models/elementType#ElementType'
 				}
 			}
 		}
