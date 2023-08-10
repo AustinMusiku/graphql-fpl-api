@@ -5,7 +5,7 @@ import { GameWeek } from './gameWeek'
 import { PastFixture } from './pastFixture'
 import { UpcomingFixture } from './upcomingFixture'
 import { Team } from './team'
-import { ElementType } from './ElementType'
+import { ElementType } from './elementType'
 
 export default {
 	Query,
