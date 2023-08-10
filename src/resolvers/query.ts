@@ -52,19 +52,15 @@ export const Query: QueryResolvers = {
 			players = players.sort((a, b) => b.form - a.form)
 		}
 		if (by_transfers) {
-			players = players
-				.sort(
-					(a, b) =>
-						b.transfers_in_event +
-						b.transfers_out_event -
-						(a.transfers_in_event + a.transfers_out_event)
-				)
-				.slice(0, 20)
+			players = players.sort(
+				(a, b) =>
+					b.transfers_in_event +
+					b.transfers_out_event -
+					(a.transfers_in_event + a.transfers_out_event)
+			)
 		}
 		if (by_points) {
-			players = players
-				.sort((a, b) => b.total_points - a.total_points)
-				.slice(0, 20)
+			players = players.sort((a, b) => b.total_points - a.total_points)
 		}
 		if (trim_extras) {
 			players = players.filter(
