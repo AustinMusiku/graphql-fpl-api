@@ -82,6 +82,7 @@ export const typeDefs = /* GraphQL */ `
 		goals_scored: Int
 		assists: Int
 		saves: Int
+		clean_sheets: Int
 		bonus: Int
 		bps: Int
 		form: Float

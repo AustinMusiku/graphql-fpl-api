@@ -23,6 +23,7 @@ export const Player: PlayerResolvers = {
 	goals_scored: ({ goals_scored }) => goals_scored,
 	assists: ({ assists }) => assists,
 	saves: ({ saves }) => saves,
+	clean_sheets: ({ clean_sheets }) => clean_sheets,
 	bonus: ({ bonus }) => bonus,
 	bps: ({ bps }) => bps,
 	form: ({ form }) => form,
