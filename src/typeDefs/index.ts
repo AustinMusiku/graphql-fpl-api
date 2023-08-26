@@ -1,5 +1,8 @@
 export const typeDefs = /* GraphQL */ `
 	type Query {
+		element_types: [ElementType]
+		gameweek(id: Int, is_current: Boolean, is_next: Boolean): GameWeek
+		gameweeks(is_finished: Boolean): [GameWeek]
 		player(id: Int): Player
 		players(
 			first: Int
@@ -13,11 +16,8 @@ export const typeDefs = /* GraphQL */ `
 			mid_rangers: Boolean
 			budgets: Boolean
 		): [Player]
-		gameweek(id: Int, is_current: Boolean, is_next: Boolean): GameWeek
-		gameweeks(is_finished: Boolean): [GameWeek]
 		team(id: Int): Team
 		teams: [Team]
-		element_types: [ElementType]
 	}
 
 	type Chip {
@@ -26,78 +26,78 @@ export const typeDefs = /* GraphQL */ `
 	}
 
 	type GameWeek {
-		id: Int
-		highest_score: Int
-		deadline_time: String
-		finished: Boolean
-		is_previous: Boolean
-		is_current: Boolean
-		is_next: Boolean
 		avg_points: Int
 		chip_plays: [Chip]
+		deadline_time: String
+		finished: Boolean
+		highest_score: Int
+		id: Int
+		is_current: Boolean
+		is_next: Boolean
+		is_previous: Boolean
 	}
 
 	type PastFixture {
-		was_home: Boolean
-		opponent_team: Int
-		total_points: Int
-		team_h_score: Int
-		team_a_score: Int
-		round: Int
-		minutes: Int
-		goals_scored: Int
 		assists: Int
+		bps: Int
 		clean_sheets: Int
 		goals_conceded: Int
+		goals_scored: Int
+		minutes: Int
+		opponent_team: Int
 		own_goals: Int
-		penalties_saved: Int
 		penalties_missed: Int
-		yellow_cards: Int
+		penalties_saved: Int
 		red_cards: Int
+		round: Int
 		saves: Int
-		bps: Int
-		value: Int
 		selected: Int
+		team_a_score: Int
+		team_h_score: Int
+		total_points: Int
+		value: Int
+		was_home: Boolean
+		yellow_cards: Int
 	}
 
 	type Player {
-		id: Int
-		code: Int
+		assists: Int
+		bonus: Int
+		bps: Int
 		chance_of_playing_next_round: Int
 		chance_of_playing_this_round: Int
+		clean_sheets: Int
+		code: Int
 		cost_change_event: Int
+		creativity: Float
 		element_type: ElementType
+		ep_next: Float
+		ep_this: Float
 		event_points: Int
+		expected_assists: Float
+		expected_goal_involvements: Float
+		expected_goals: Float
+		expected_goals_conceded: Float
 		first_name: String
-		second_name: String
-		web_name: String
+		form: Float
+		goals_scored: Int
+		ict_index: Float
+		id: Int
+		influence: Float
+		minutes: Int
 		news: String
 		news_added: String
 		now_cost: Float
+		pastFixtures: [PastFixture]
+		points_per_game: Float
+		saves: Int
+		second_name: String
+		selected_by_percent: Float
 		team: Team
+		threat: Float
 		total_points: Int
 		transfers_in_event: Int
 		transfers_out_event: Int
-		minutes: Int
-		goals_scored: Int
-		assists: Int
-		saves: Int
-		clean_sheets: Int
-		bonus: Int
-		bps: Int
-		form: Float
-		points_per_game: Float
-		selected_by_percent: Float
-		influence: Float
-		creativity: Float
-		threat: Float
-		ict_index: Float
-		expected_goals: Float
-		expected_assists: Float
-		expected_goal_involvements: Float
-		expected_goals_conceded: Float
-		ep_next: Float
-		ep_this: Float
 		UpcomingFixtures(
 			gw: Int
 			first: Int
@@ -105,19 +105,19 @@ export const typeDefs = /* GraphQL */ `
 			from: Int
 			to: Int
 		): [UpcomingFixture]
-		pastFixtures: [PastFixture]
+		web_name: String
 	}
 
 	type UpcomingFixture {
-		id: Int
-		event: Int
-		minutes: Int
 		difficulty: Int
-		team_h: Int
-		team_a: Int
+		event: Int
 		finished: Boolean
+		id: Int
 		is_home: Boolean
 		kickoff_time: String
+		minutes: Int
+		team_a: Int
+		team_h: Int
 	}
 
 	type Team {
@@ -127,32 +127,32 @@ export const typeDefs = /* GraphQL */ `
 		loss: Int
 		name: String
 		played: Int
+		players: [Player]
 		points: Int
 		position: Int
+		pulse_id: Int
 		short_name: String
 		strength: Int
-		win: Int
-		strength_overall_home: Int
-		strength_overall_away: Int
-		strength_attack_home: Int
 		strength_attack_away: Int
-		strength_defence_home: Int
+		strength_attack_home: Int
 		strength_defence_away: Int
-		pulse_id: Int
-		players: [Player]
+		strength_defence_home: Int
+		strength_overall_away: Int
+		strength_overall_home: Int
+		win: Int
 	}
 
 	type ElementType {
+		element_count: Int
 		id: Int
 		plural_name: String
 		plural_name_short: String
 		singular_name: String
 		singular_name_short: String
-		squad_select: Int
-		squad_min_play: Int
 		squad_max_play: Int
-		ui_shirt_specific: Boolean
+		squad_min_play: Int
+		squad_select: Int
 		sub_positions_locked: [Int]
-		element_count: Int
+		ui_shirt_specific: Boolean
 	}
 `
