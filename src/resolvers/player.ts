@@ -2,49 +2,53 @@ import { PlayerResolvers } from '../types/schema'
 import { GraphQLError } from 'graphql'
 
 export const Player: PlayerResolvers = {
-	id: ({ id }) => id,
-	code: ({ code }) => code,
+	assists: ({ assists }) => assists,
+
+	bonus: ({ bonus }) => bonus,
+	bps: ({ bps }) => bps,
 	chance_of_playing_next_round: ({ chance_of_playing_next_round }) =>
 		chance_of_playing_next_round,
 	chance_of_playing_this_round: ({ chance_of_playing_this_round }) =>
 		chance_of_playing_this_round,
-	cost_change_event: ({ cost_change_event }) => cost_change_event,
-	event_points: ({ event_points }) => event_points,
-	first_name: ({ first_name }) => first_name,
-	second_name: ({ second_name }) => second_name,
-	web_name: ({ web_name }) => web_name,
-	news: ({ news }) => news,
-	news_added: ({ news_added }) => news_added,
-	now_cost: ({ now_cost }) => now_cost,
-	total_points: ({ total_points }) => total_points,
-	transfers_in_event: ({ transfers_in_event }) => transfers_in_event,
-	transfers_out_event: ({ transfers_out_event }) => transfers_out_event,
-	minutes: ({ minutes }) => minutes,
-	goals_scored: ({ goals_scored }) => goals_scored,
-	assists: ({ assists }) => assists,
-	saves: ({ saves }) => saves,
 	clean_sheets: ({ clean_sheets }) => clean_sheets,
-	bonus: ({ bonus }) => bonus,
-	bps: ({ bps }) => bps,
-	form: ({ form }) => form,
-	points_per_game: ({ points_per_game }) => points_per_game,
-	selected_by_percent: ({ selected_by_percent }) => selected_by_percent,
-	influence: ({ influence }) => influence,
+	code: ({ code }) => code,
 	creativity: ({ creativity }) => creativity,
-	threat: ({ threat }) => threat,
-	ict_index: ({ ict_index }) => ict_index,
-	expected_goals: ({ expected_goals }) => expected_goals,
-	expected_assists: ({ expected_assists }) => expected_assists,
-	expected_goal_involvements: ({ expected_goal_involvements }) =>
-		expected_goal_involvements,
-	expected_goals_conceded: ({ expected_goals_conceded }) =>
-		expected_goals_conceded,
-	ep_next: ({ ep_next }) => (ep_next ? parseFloat(ep_next) : null),
-	ep_this: ({ ep_this }) => (ep_this ? parseFloat(ep_this) : null),
+	cost_change_event: ({ cost_change_event }) => cost_change_event,
 	element_type: ({ element_type }, _, { loaders }) => {
 		const elementTypeData = loaders.elementTypeData.load(element_type)
 		return elementTypeData
 	},
+	ep_next: ({ ep_next }) => (ep_next ? parseFloat(ep_next) : null),
+	ep_this: ({ ep_this }) => (ep_this ? parseFloat(ep_this) : null),
+	event_points: ({ event_points }) => event_points,
+	expected_assists: ({ expected_assists }) => expected_assists,
+	expected_goals: ({ expected_goals }) => expected_goals,
+	expected_goals_conceded: ({ expected_goals_conceded }) =>
+		expected_goals_conceded,
+	expected_goal_involvements: ({ expected_goal_involvements }) =>
+		expected_goal_involvements,
+	first_name: ({ first_name }) => first_name,
+	form: ({ form }) => form,
+	goals_scored: ({ goals_scored }) => goals_scored,
+	ict_index: ({ ict_index }) => ict_index,
+	id: ({ id }) => id,
+	influence: ({ influence }) => influence,
+	minutes: ({ minutes }) => minutes,
+	news: ({ news }) => news,
+	news_added: ({ news_added }) => news_added,
+	now_cost: ({ now_cost }) => now_cost,
+	points_per_game: ({ points_per_game }) => points_per_game,
+	pastFixtures: async ({ id }, _, { loaders }) => {
+		const playerEvents = await loaders.playerEvent.load(id)
+		return playerEvents.history
+	},
+	second_name: ({ second_name }) => second_name,
+	saves: ({ saves }) => saves,
+	selected_by_percent: ({ selected_by_percent }) => selected_by_percent,
+	total_points: ({ total_points }) => total_points,
+	transfers_in_event: ({ transfers_in_event }) => transfers_in_event,
+	transfers_out_event: ({ transfers_out_event }) => transfers_out_event,
+	threat: ({ threat }) => threat,
 	team: async ({ team }, _, { loaders }) => {
 		const teamData = await loaders.teamData.load(team)
 		return teamData
@@ -81,8 +85,5 @@ export const Player: PlayerResolvers = {
 
 		return fixtures
 	},
-	pastFixtures: async ({ id }, _, { loaders }) => {
-		const playerEvents = await loaders.playerEvent.load(id)
-		return playerEvents.history
-	}
+	web_name: ({ web_name }) => web_name
 }

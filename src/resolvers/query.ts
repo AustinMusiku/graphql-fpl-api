@@ -8,14 +8,9 @@ import {
 import fetchController from '../controllers/fetchControllers'
 
 export const Query: QueryResolvers = {
-	gameweeks: async (_: unknown, { is_finished }: QueryGameweeksArgs) => {
-		let gws = await fetchController.getGameWeeks()
-		if (is_finished) {
-			gws = gws.filter(({ finished }) => finished === true)
-		} else if (!is_finished) {
-			gws = gws.filter(({ finished }) => finished === false)
-		}
-		return gws
+	element_types: async () => {
+		const elementTypes = await fetchController.getElementTypes()
+		return elementTypes
 	},
 	gameweek: async (
 		_: unknown,
@@ -31,6 +26,19 @@ export const Query: QueryResolvers = {
 		if (is_next) {
 			return gws.find(({ is_next }) => is_next === true)
 		}
+	},
+	gameweeks: async (_: unknown, { is_finished }: QueryGameweeksArgs) => {
+		let gws = await fetchController.getGameWeeks()
+		if (is_finished) {
+			gws = gws.filter(({ finished }) => finished === true)
+		} else if (!is_finished) {
+			gws = gws.filter(({ finished }) => finished === false)
+		}
+		return gws
+	},
+	player: async (_: unknown, { id }: QueryPlayerArgs, { loaders }) => {
+		const player = await loaders.playerData.load(id)
+		return player
 	},
 	players: async (
 		_: unknown,
@@ -102,20 +110,12 @@ export const Query: QueryResolvers = {
 		}
 		return players
 	},
-	player: async (_: unknown, { id }: QueryPlayerArgs, { loaders }) => {
-		const player = await loaders.playerData.load(id)
-		return player
-	},
-	teams: async () => {
-		const teams = await fetchController.getTeams()
-		return teams
-	},
 	team: async (_: unknown, { id }: { id: number }, { loaders }) => {
 		const teams = await loaders.teamData.load(id)
 		return teams
 	},
-	element_types: async () => {
-		const elementTypes = await fetchController.getElementTypes()
-		return elementTypes
+	teams: async () => {
+		const teams = await fetchController.getTeams()
+		return teams
 	}
 }
