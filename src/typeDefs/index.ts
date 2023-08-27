@@ -67,36 +67,84 @@ export const typeDefs = /* GraphQL */ `
 		chance_of_playing_next_round: Int
 		chance_of_playing_this_round: Int
 		clean_sheets: Int
+		clean_sheets_per_90: Float
 		code: Int
+		corners_and_indirect_freekicks_order: Int
+		corners_and_indirect_freekicks_text: String
 		cost_change_event: Int
+		cost_change_event_fall: Int
+		cost_change_start: Int
+		cost_change_start_fall: Int
 		creativity: Float
+		creativity_rank: Int
+		creativity_rank_type: Int
+		direct_freekicks_order: Int
+		direct_freekicks_text: String
+		dreamteam_count: Int
 		element_type: ElementType
 		ep_next: Float
 		ep_this: Float
 		event_points: Int
 		expected_assists: Float
+		expected_assists_per_90: Float
 		expected_goal_involvements: Float
+		expected_goal_involvements_per_90: Float
 		expected_goals: Float
 		expected_goals_conceded: Float
+		expected_goals_conceded_per_90: Float
+		expected_goals_per_90: Float
 		first_name: String
 		form: Float
+		form_rank: Int
+		form_rank_type: Int
+		goals_conceded: Int
+		goals_conceded_per_90: Float
 		goals_scored: Int
 		ict_index: Float
+		ict_index_rank: Int
+		ict_index_rank_type: Int
 		id: Int
+		in_dreamteam: Boolean
 		influence: Float
+		influence_rank: Int
+		influence_rank_type: Int
 		minutes: Int
 		news: String
 		news_added: String
 		now_cost: Float
+		now_cost_rank: Int
+		now_cost_rank_type: Int
+		own_goals: Int
 		pastFixtures: [PastFixture]
+		penalties_missed: Int
+		penalties_order: Int
+		penalties_saved: Int
+		penalties_text: String
+		photo: String
 		points_per_game: Float
+		points_per_game_rank: Int
+		points_per_game_rank_type: Int
+		red_cards: Int
 		saves: Int
+		saves_per_90: Float
 		second_name: String
 		selected_by_percent: Float
+		selected_rank: Int
+		selected_rank_type: Int
+		special: Boolean
+		squad_number: Int
+		starts: Int
+		starts_per_90: Float
+		status: String
 		team: Team
+		team_code: Int
 		threat: Float
+		threat_rank: Int
+		threat_rank_type: Int
 		total_points: Int
+		transfers_in: Int
 		transfers_in_event: Int
+		transfers_out: Int
 		transfers_out_event: Int
 		UpcomingFixtures(
 			gw: Int
@@ -105,7 +153,10 @@ export const typeDefs = /* GraphQL */ `
 			from: Int
 			to: Int
 		): [UpcomingFixture]
+		value_form: String
+		value_season: String
 		web_name: String
+		yellow_cards: Int
 	}
 
 	type UpcomingFixture {
