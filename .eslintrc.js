@@ -22,7 +22,15 @@ module.exports = {
 		{
 			files: ['*.graphql'],
 			parser: '@graphql-eslint/eslint-plugin',
-			plugins: ['@graphql-eslint']
+			plugins: ['@graphql-eslint'],
+			rules: {
+				'@graphql-eslint/alphabetize': [
+					'error',
+					{
+						fields: ['ObjectTypeDefinition']
+					}
+				]
+			}
 		}
 	]
 }
