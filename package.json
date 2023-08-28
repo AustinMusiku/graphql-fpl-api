@@ -7,7 +7,7 @@
 	"scripts": {
 		"start": "cross-env NODE_ENV=production node dist/index.js",
 		"dev": "concurrently \"cross-env NODE_ENV=development nodemon src/index.ts\" \"yarn codegen --watch\"",
-		"build": "tsc",
+		"build": "tsc && cp -r src/typeDefs/ dist/",
 		"lint": "eslint --ext .ts src",
 		"codegen": "graphql-codegen --config codegen.ts",
 		"test": "jest",
