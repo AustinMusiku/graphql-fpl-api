@@ -6,6 +6,7 @@ import { PastFixture as PastFixtureModel } from '@/models/pastFixture';
 import { UpcomingFixture as UpcomingFixtureModel } from '@/models/upcomingFixture';
 import { Team as TeamModel } from '@/models/team';
 import { ElementType as ElementTypeModel } from '@/models/elementType';
+import { Fixture as FixtureModel } from '@/models/fixture';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -26,6 +27,12 @@ export type Chip = {
   num_played?: Maybe<Scalars['Int']>;
 };
 
+export type ElementStats = {
+  __typename?: 'ElementStats';
+  element?: Maybe<Scalars['Int']>;
+  value?: Maybe<Scalars['Int']>;
+};
+
 export type ElementType = {
   __typename?: 'ElementType';
   element_count?: Maybe<Scalars['Int']>;
@@ -39,6 +46,34 @@ export type ElementType = {
   squad_select?: Maybe<Scalars['Int']>;
   sub_positions_locked?: Maybe<Array<Maybe<Scalars['Int']>>>;
   ui_shirt_specific?: Maybe<Scalars['Boolean']>;
+};
+
+export type Fixture = {
+  __typename?: 'Fixture';
+  code?: Maybe<Scalars['Int']>;
+  event?: Maybe<Scalars['Int']>;
+  finished?: Maybe<Scalars['Boolean']>;
+  finished_provisional?: Maybe<Scalars['Boolean']>;
+  id?: Maybe<Scalars['Int']>;
+  kickoff_time?: Maybe<Scalars['String']>;
+  minutes?: Maybe<Scalars['Int']>;
+  provisional_start_time?: Maybe<Scalars['Boolean']>;
+  pulse_id?: Maybe<Scalars['Int']>;
+  started?: Maybe<Scalars['Boolean']>;
+  stats?: Maybe<Array<Maybe<FixtureStats>>>;
+  team_a?: Maybe<Scalars['Int']>;
+  team_a_difficulty?: Maybe<Scalars['Int']>;
+  team_a_score?: Maybe<Scalars['Int']>;
+  team_h?: Maybe<Scalars['Int']>;
+  team_h_difficulty?: Maybe<Scalars['Int']>;
+  team_h_score?: Maybe<Scalars['Int']>;
+};
+
+export type FixtureStats = {
+  __typename?: 'FixtureStats';
+  a?: Maybe<Array<Maybe<ElementStats>>>;
+  h?: Maybe<Array<Maybe<ElementStats>>>;
+  identifier?: Maybe<Scalars['String']>;
 };
 
 export type GameWeek = {
@@ -184,12 +219,21 @@ export type PlayerUpcomingFixturesArgs = {
 export type Query = {
   __typename?: 'Query';
   element_types?: Maybe<Array<Maybe<ElementType>>>;
+  fixtures?: Maybe<Array<Maybe<Fixture>>>;
   gameweek?: Maybe<GameWeek>;
   gameweeks?: Maybe<Array<Maybe<GameWeek>>>;
   player?: Maybe<Player>;
   players?: Maybe<Array<Maybe<Player>>>;
   team?: Maybe<Team>;
   teams?: Maybe<Array<Maybe<Team>>>;
+};
+
+
+export type QueryFixturesArgs = {
+  away?: InputMaybe<Scalars['Boolean']>;
+  gw?: InputMaybe<Scalars['Int']>;
+  home?: InputMaybe<Scalars['Boolean']>;
+  team?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -335,7 +379,10 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Chip: ResolverTypeWrapper<ChipModel>;
+  ElementStats: ResolverTypeWrapper<ElementStats>;
   ElementType: ResolverTypeWrapper<ElementTypeModel>;
+  Fixture: ResolverTypeWrapper<FixtureModel>;
+  FixtureStats: ResolverTypeWrapper<FixtureStats>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
   GameWeek: ResolverTypeWrapper<GameWeekModel>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
@@ -351,7 +398,10 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   Chip: ChipModel;
+  ElementStats: ElementStats;
   ElementType: ElementTypeModel;
+  Fixture: FixtureModel;
+  FixtureStats: FixtureStats;
   Float: Scalars['Float'];
   GameWeek: GameWeekModel;
   Int: Scalars['Int'];
@@ -369,6 +419,12 @@ export type ChipResolvers<ContextType = any, ParentType extends ResolversParentT
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type ElementStatsResolvers<ContextType = any, ParentType extends ResolversParentTypes['ElementStats'] = ResolversParentTypes['ElementStats']> = {
+  element?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  value?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type ElementTypeResolvers<ContextType = any, ParentType extends ResolversParentTypes['ElementType'] = ResolversParentTypes['ElementType']> = {
   element_count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
@@ -381,6 +437,34 @@ export type ElementTypeResolvers<ContextType = any, ParentType extends Resolvers
   squad_select?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   sub_positions_locked?: Resolver<Maybe<Array<Maybe<ResolversTypes['Int']>>>, ParentType, ContextType>;
   ui_shirt_specific?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type FixtureResolvers<ContextType = any, ParentType extends ResolversParentTypes['Fixture'] = ResolversParentTypes['Fixture']> = {
+  code?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  event?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  finished?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  finished_provisional?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  kickoff_time?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  minutes?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  provisional_start_time?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  pulse_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  started?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  stats?: Resolver<Maybe<Array<Maybe<ResolversTypes['FixtureStats']>>>, ParentType, ContextType>;
+  team_a?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  team_a_difficulty?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  team_a_score?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  team_h?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  team_h_difficulty?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  team_h_score?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type FixtureStatsResolvers<ContextType = any, ParentType extends ResolversParentTypes['FixtureStats'] = ResolversParentTypes['FixtureStats']> = {
+  a?: Resolver<Maybe<Array<Maybe<ResolversTypes['ElementStats']>>>, ParentType, ContextType>;
+  h?: Resolver<Maybe<Array<Maybe<ResolversTypes['ElementStats']>>>, ParentType, ContextType>;
+  identifier?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -517,6 +601,7 @@ export type PlayerResolvers<ContextType = any, ParentType extends ResolversParen
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   element_types?: Resolver<Maybe<Array<Maybe<ResolversTypes['ElementType']>>>, ParentType, ContextType>;
+  fixtures?: Resolver<Maybe<Array<Maybe<ResolversTypes['Fixture']>>>, ParentType, ContextType, Partial<QueryFixturesArgs>>;
   gameweek?: Resolver<Maybe<ResolversTypes['GameWeek']>, ParentType, ContextType, Partial<QueryGameweekArgs>>;
   gameweeks?: Resolver<Maybe<Array<Maybe<ResolversTypes['GameWeek']>>>, ParentType, ContextType, Partial<QueryGameweeksArgs>>;
   player?: Resolver<Maybe<ResolversTypes['Player']>, ParentType, ContextType, Partial<QueryPlayerArgs>>;
@@ -563,7 +648,10 @@ export type UpcomingFixtureResolvers<ContextType = any, ParentType extends Resol
 
 export type Resolvers<ContextType = any> = {
   Chip?: ChipResolvers<ContextType>;
+  ElementStats?: ElementStatsResolvers<ContextType>;
   ElementType?: ElementTypeResolvers<ContextType>;
+  Fixture?: FixtureResolvers<ContextType>;
+  FixtureStats?: FixtureStatsResolvers<ContextType>;
   GameWeek?: GameWeekResolvers<ContextType>;
   PastFixture?: PastFixtureResolvers<ContextType>;
   Player?: PlayerResolvers<ContextType>;

@@ -6,6 +6,7 @@ import { PastFixture } from './pastFixture'
 import { UpcomingFixture } from './upcomingFixture'
 import { Team } from './team'
 import { ElementType } from './elementType'
+import { Fixture } from './fixture'
 
 export default {
 	Query,
@@ -15,5 +16,6 @@ export default {
 	PastFixture,
 	UpcomingFixture,
 	Team,
-	ElementType
+	ElementType,
+	Fixture
 }

@@ -1,5 +1,6 @@
 type Query {
 	element_types: [ElementType]
+	fixtures(gw: Int, team: Int, home: Boolean, away: Boolean): [Fixture]
 	gameweek(id: Int, is_current: Boolean, is_next: Boolean): GameWeek
 	gameweeks(is_finished: Boolean): [GameWeek]
 	player(id: Int): Player
@@ -204,4 +205,35 @@ type ElementType {
 	squad_select: Int
 	sub_positions_locked: [Int]
 	ui_shirt_specific: Boolean
+}
+
+type Fixture {
+	code: Int
+	event: Int
+	finished: Boolean
+	finished_provisional: Boolean
+	id: Int
+	kickoff_time: String
+	minutes: Int
+	provisional_start_time: Boolean
+	pulse_id: Int
+	started: Boolean
+	stats: [FixtureStats]
+	team_a: Int
+	team_a_difficulty: Int
+	team_a_score: Int
+	team_h: Int
+	team_h_difficulty: Int
+	team_h_score: Int
+}
+
+type FixtureStats {
+	a: [ElementStats]
+	h: [ElementStats]
+	identifier: String
+}
+
+type ElementStats {
+	element: Int
+	value: Int
 }
