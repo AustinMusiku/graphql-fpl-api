@@ -3,7 +3,8 @@ import {
 	QueryGameweeksArgs,
 	QueryPlayerArgs,
 	QueryPlayersArgs,
-	QueryResolvers
+	QueryResolvers,
+	QueryFixturesArgs
 } from '../types/schema'
 import fetchController from '../controllers/fetchControllers'
 
@@ -117,5 +118,31 @@ export const Query: QueryResolvers = {
 	teams: async () => {
 		const teams = await fetchController.getTeams()
 		return teams
+	},
+	fixtures: async (
+		_: unknown,
+		{ gw, team, home, away }: QueryFixturesArgs
+	) => {
+		let fixtures = await fetchController.getFixtures()
+
+		if (gw) {
+			fixtures = fixtures.filter(({ event }) => event === gw)
+		}
+
+		if (team) {
+			fixtures = fixtures.filter(
+				({ team_a, team_h }) => team_a === team || team_h === team
+			)
+
+			if (home || away === false) {
+				fixtures = fixtures.filter(({ team_h }) => team_h === team)
+			}
+
+			if (away || home === false) {
+				fixtures = fixtures.filter(({ team_a }) => team_a === team)
+			}
+		}
+
+		return fixtures
 	}
 }
