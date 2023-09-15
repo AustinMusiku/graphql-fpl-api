@@ -6,7 +6,6 @@ import { PastFixture as PastFixtureModel } from '@/models/pastFixture';
 import { UpcomingFixture as UpcomingFixtureModel } from '@/models/upcomingFixture';
 import { Team as TeamModel } from '@/models/team';
 import { ElementType as ElementTypeModel } from '@/models/elementType';
-import { Fixture as FixtureModel } from '@/models/fixture';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -381,7 +380,7 @@ export type ResolversTypes = {
   Chip: ResolverTypeWrapper<ChipModel>;
   ElementStats: ResolverTypeWrapper<ElementStats>;
   ElementType: ResolverTypeWrapper<ElementTypeModel>;
-  Fixture: ResolverTypeWrapper<FixtureModel>;
+  Fixture: ResolverTypeWrapper<Fixture>;
   FixtureStats: ResolverTypeWrapper<FixtureStats>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
   GameWeek: ResolverTypeWrapper<GameWeekModel>;
@@ -400,7 +399,7 @@ export type ResolversParentTypes = {
   Chip: ChipModel;
   ElementStats: ElementStats;
   ElementType: ElementTypeModel;
-  Fixture: FixtureModel;
+  Fixture: Fixture;
   FixtureStats: FixtureStats;
   Float: Scalars['Float'];
   GameWeek: GameWeekModel;
