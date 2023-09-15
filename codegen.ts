@@ -15,7 +15,8 @@ const config: CodegenConfig = {
 					PastFixture: '@/models/pastFixture#PastFixture',
 					UpcomingFixture: '@/models/upcomingFixture#UpcomingFixture',
 					Team: '@/models/team#Team',
-					ElementType: '@/models/elementType#ElementType'
+					ElementType: '@/models/elementType#ElementType',
+					Fixture: '@/models/fixture#Fixture'
 				}
 			}
 		}
