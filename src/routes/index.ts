@@ -14,7 +14,7 @@ class Routes {
 			res.send(`
 				<h1>Fplfriend</h1>
 				<a href="/graphql">Click here to go to GraphQL Playground</a>
-				<p>For more information, visit <a href="https://www.github.com/austinmusiku/fplfriend-api">github repo</a></p>
+				<p>For more information, visit <a href="https://www.github.com/austinmusiku/graphql-fpl-api">github repo</a></p>
 			`)
 		})
 	}
