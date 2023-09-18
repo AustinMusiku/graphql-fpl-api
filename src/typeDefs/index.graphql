@@ -1,6 +1,12 @@
 type Query {
 	element_types: [ElementType]
-	fixtures(gw: Int, team: Int, home: Boolean, away: Boolean): [Fixture]
+	fixtures(
+		gw: Int
+		team: Int
+		home: Boolean
+		away: Boolean
+		finished: Boolean
+	): [Fixture]
 	gameweek(id: Int, is_current: Boolean, is_next: Boolean): GameWeek
 	gameweeks(is_finished: Boolean): [GameWeek]
 	player(id: Int): Player

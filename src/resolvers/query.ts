@@ -121,9 +121,15 @@ export const Query: QueryResolvers = {
 	},
 	fixtures: async (
 		_: unknown,
-		{ gw, team, home, away }: QueryFixturesArgs
+		{ gw, team, home, away, finished }: QueryFixturesArgs
 	) => {
 		let fixtures = await fetchController.getFixtures()
+
+		if (finished) {
+			fixtures = fixtures.filter(({ finished }) => finished === true)
+		} else if (finished === false) {
+			fixtures = fixtures.filter(({ finished }) => finished === false)
+		}
 
 		if (gw) {
 			fixtures = fixtures.filter(({ event }) => event === gw)

@@ -231,6 +231,7 @@ export type Query = {
 
 export type QueryFixturesArgs = {
   away?: InputMaybe<Scalars['Boolean']>;
+  finished?: InputMaybe<Scalars['Boolean']>;
   gw?: InputMaybe<Scalars['Int']>;
   home?: InputMaybe<Scalars['Boolean']>;
   team?: InputMaybe<Scalars['Int']>;
