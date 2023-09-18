@@ -298,15 +298,21 @@ export type Team = {
 
 export type UpcomingFixture = {
   __typename?: 'UpcomingFixture';
+  code?: Maybe<Scalars['Int']>;
   difficulty?: Maybe<Scalars['Int']>;
   event?: Maybe<Scalars['Int']>;
   finished?: Maybe<Scalars['Boolean']>;
+  finished_provisional?: Maybe<Scalars['Boolean']>;
   id?: Maybe<Scalars['Int']>;
   is_home?: Maybe<Scalars['Boolean']>;
   kickoff_time?: Maybe<Scalars['String']>;
   minutes?: Maybe<Scalars['Int']>;
+  pulse_id?: Maybe<Scalars['Int']>;
+  started?: Maybe<Scalars['Boolean']>;
   team_a?: Maybe<Scalars['Int']>;
+  team_a_difficulty?: Maybe<Scalars['Int']>;
   team_h?: Maybe<Scalars['Int']>;
+  team_h_difficulty?: Maybe<Scalars['Int']>;
 };
 
 
@@ -635,15 +641,21 @@ export type TeamResolvers<ContextType = any, ParentType extends ResolversParentT
 };
 
 export type UpcomingFixtureResolvers<ContextType = any, ParentType extends ResolversParentTypes['UpcomingFixture'] = ResolversParentTypes['UpcomingFixture']> = {
+  code?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   difficulty?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   event?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   finished?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  finished_provisional?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   is_home?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   kickoff_time?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   minutes?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  pulse_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  started?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   team_a?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  team_a_difficulty?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   team_h?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  team_h_difficulty?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

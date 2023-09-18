@@ -166,15 +166,21 @@ type Player {
 }
 
 type UpcomingFixture {
+	code: Int
 	difficulty: Int
 	event: Int
 	finished: Boolean
+	finished_provisional: Boolean
 	id: Int
 	is_home: Boolean
 	kickoff_time: String
 	minutes: Int
+	pulse_id: Int
+	started: Boolean
 	team_a: Int
+	team_a_difficulty: Int
 	team_h: Int
+	team_h_difficulty: Int
 }
 
 type Team {
