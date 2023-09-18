@@ -115,7 +115,6 @@ export type PastFixture = {
 
 export type Player = {
   __typename?: 'Player';
-  UpcomingFixtures?: Maybe<Array<Maybe<UpcomingFixture>>>;
   assists?: Maybe<Scalars['Int']>;
   bonus?: Maybe<Scalars['Int']>;
   bps?: Maybe<Scalars['Int']>;
@@ -170,7 +169,7 @@ export type Player = {
   now_cost_rank?: Maybe<Scalars['Int']>;
   now_cost_rank_type?: Maybe<Scalars['Int']>;
   own_goals?: Maybe<Scalars['Int']>;
-  pastFixtures?: Maybe<Array<Maybe<PastFixture>>>;
+  past_fixtures?: Maybe<Array<Maybe<PastFixture>>>;
   penalties_missed?: Maybe<Scalars['Int']>;
   penalties_order?: Maybe<Scalars['Int']>;
   penalties_saved?: Maybe<Scalars['Int']>;
@@ -201,6 +200,7 @@ export type Player = {
   transfers_in_event?: Maybe<Scalars['Int']>;
   transfers_out?: Maybe<Scalars['Int']>;
   transfers_out_event?: Maybe<Scalars['Int']>;
+  upcoming_fixtures?: Maybe<Array<Maybe<UpcomingFixture>>>;
   value_form?: Maybe<Scalars['String']>;
   value_season?: Maybe<Scalars['String']>;
   web_name?: Maybe<Scalars['String']>;
@@ -208,7 +208,7 @@ export type Player = {
 };
 
 
-export type PlayerUpcomingFixturesArgs = {
+export type PlayerUpcoming_FixturesArgs = {
   first?: InputMaybe<Scalars['Int']>;
   from?: InputMaybe<Scalars['Int']>;
   gw?: InputMaybe<Scalars['Int']>;
@@ -507,7 +507,6 @@ export type PastFixtureResolvers<ContextType = any, ParentType extends Resolvers
 };
 
 export type PlayerResolvers<ContextType = any, ParentType extends ResolversParentTypes['Player'] = ResolversParentTypes['Player']> = {
-  UpcomingFixtures?: Resolver<Maybe<Array<Maybe<ResolversTypes['UpcomingFixture']>>>, ParentType, ContextType, Partial<PlayerUpcomingFixturesArgs>>;
   assists?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   bonus?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   bps?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
@@ -562,7 +561,7 @@ export type PlayerResolvers<ContextType = any, ParentType extends ResolversParen
   now_cost_rank?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   now_cost_rank_type?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   own_goals?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  pastFixtures?: Resolver<Maybe<Array<Maybe<ResolversTypes['PastFixture']>>>, ParentType, ContextType>;
+  past_fixtures?: Resolver<Maybe<Array<Maybe<ResolversTypes['PastFixture']>>>, ParentType, ContextType>;
   penalties_missed?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   penalties_order?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   penalties_saved?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
@@ -593,6 +592,7 @@ export type PlayerResolvers<ContextType = any, ParentType extends ResolversParen
   transfers_in_event?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   transfers_out?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   transfers_out_event?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  upcoming_fixtures?: Resolver<Maybe<Array<Maybe<ResolversTypes['UpcomingFixture']>>>, ParentType, ContextType, Partial<PlayerUpcoming_FixturesArgs>>;
   value_form?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   value_season?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   web_name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;

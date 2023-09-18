@@ -121,7 +121,7 @@ type Player {
 	now_cost_rank: Int
 	now_cost_rank_type: Int
 	own_goals: Int
-	pastFixtures: [PastFixture]
+	past_fixtures: [PastFixture]
 	penalties_missed: Int
 	penalties_order: Int
 	penalties_saved: Int
@@ -152,7 +152,7 @@ type Player {
 	transfers_in_event: Int
 	transfers_out: Int
 	transfers_out_event: Int
-	UpcomingFixtures(
+	upcoming_fixtures(
 		gw: Int
 		first: Int
 		last: Int

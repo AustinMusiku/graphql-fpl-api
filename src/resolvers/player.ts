@@ -74,7 +74,7 @@ export const Player: PlayerResolvers = {
 	now_cost_rank: ({ now_cost_rank }) => now_cost_rank,
 	now_cost_rank_type: ({ now_cost_rank_type }) => now_cost_rank_type,
 	own_goals: ({ own_goals }) => own_goals,
-	pastFixtures: async ({ id }, _, { loaders }) => {
+	past_fixtures: async ({ id }, _, { loaders }) => {
 		const playerEvents = await loaders.playerEvent.load(id)
 		return playerEvents.history
 	},
@@ -112,7 +112,7 @@ export const Player: PlayerResolvers = {
 	transfers_in_event: ({ transfers_in_event }) => transfers_in_event,
 	transfers_out: ({ transfers_out }) => transfers_out,
 	transfers_out_event: ({ transfers_out_event }) => transfers_out_event,
-	UpcomingFixtures: async (
+	upcoming_fixtures: async (
 		{ team },
 		{ gw, first, last, from, to },
 		{ loaders }
