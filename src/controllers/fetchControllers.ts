@@ -94,8 +94,7 @@ class FetchController {
 						'User-Agent': 'XXXXXX'
 					}
 				})
-				const json = await response.json()
-				general = json
+				general = await response.json()
 				cache.set('general', general)
 				return general.elements
 			}
@@ -148,7 +147,7 @@ class FetchController {
 
 	async getGameWeeks() {
 		try {
-			const general = cache.get('general')
+			let general = cache.get('general')
 			if (general) {
 				const gws = general.events
 				return gws
@@ -160,7 +159,7 @@ class FetchController {
 						'User-Agent': 'XXXXXX'
 					}
 				})
-				const general = await response.json()
+				general = await response.json()
 				cache.set('general', general)
 				return general.events
 			}
@@ -171,7 +170,7 @@ class FetchController {
 
 	async getTeams() {
 		try {
-			const general = cache.get('general')
+			let general = await cache.get('general')
 			if (!general) {
 				console.log('miss')
 				const url = urls.general
@@ -180,7 +179,7 @@ class FetchController {
 						'User-Agent': 'XXXXXX'
 					}
 				})
-				const general = await response.json()
+				general = await response.json()
 				cache.set('general', general)
 			}
 			return general.teams
