@@ -4,7 +4,7 @@ import fetchController from '../controllers/fetchControllers'
 export const loaders = {
 	playerEvent: new dataLoader(async (keys: readonly number[]) => {
 		return keys.map(async (key) => {
-			return await fetchController.getPlayerEventsById.call(
+			return await fetchController.getPlayerEvents.call(
 				fetchController,
 				key
 			)
