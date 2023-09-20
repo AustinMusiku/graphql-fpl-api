@@ -6,6 +6,7 @@ import { PastFixture as PastFixtureModel } from '@/models/pastFixture';
 import { UpcomingFixture as UpcomingFixtureModel } from '@/models/upcomingFixture';
 import { Team as TeamModel } from '@/models/team';
 import { ElementType as ElementTypeModel } from '@/models/elementType';
+import { Fixture as FixtureModel } from '@/models/fixture';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -96,7 +97,7 @@ export type PastFixture = {
   goals_conceded?: Maybe<Scalars['Int']>;
   goals_scored?: Maybe<Scalars['Int']>;
   minutes?: Maybe<Scalars['Int']>;
-  opponent_team?: Maybe<Scalars['Int']>;
+  opponent_team?: Maybe<Team>;
   own_goals?: Maybe<Scalars['Int']>;
   penalties_missed?: Maybe<Scalars['Int']>;
   penalties_saved?: Maybe<Scalars['Int']>;
@@ -387,7 +388,7 @@ export type ResolversTypes = {
   Chip: ResolverTypeWrapper<ChipModel>;
   ElementStats: ResolverTypeWrapper<ElementStats>;
   ElementType: ResolverTypeWrapper<ElementTypeModel>;
-  Fixture: ResolverTypeWrapper<Fixture>;
+  Fixture: ResolverTypeWrapper<FixtureModel>;
   FixtureStats: ResolverTypeWrapper<FixtureStats>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
   GameWeek: ResolverTypeWrapper<GameWeekModel>;
@@ -406,7 +407,7 @@ export type ResolversParentTypes = {
   Chip: ChipModel;
   ElementStats: ElementStats;
   ElementType: ElementTypeModel;
-  Fixture: Fixture;
+  Fixture: FixtureModel;
   FixtureStats: FixtureStats;
   Float: Scalars['Float'];
   GameWeek: GameWeekModel;
@@ -494,7 +495,7 @@ export type PastFixtureResolvers<ContextType = any, ParentType extends Resolvers
   goals_conceded?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   goals_scored?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   minutes?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  opponent_team?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  opponent_team?: Resolver<Maybe<ResolversTypes['Team']>, ParentType, ContextType>;
   own_goals?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   penalties_missed?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   penalties_saved?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;

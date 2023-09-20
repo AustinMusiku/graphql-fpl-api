@@ -7,7 +7,10 @@ export const PastFixture: PastFixtureResolvers = {
 	goals_scored: ({ goals_scored }) => goals_scored,
 	goals_conceded: ({ goals_conceded }) => goals_conceded,
 	minutes: ({ minutes }) => minutes,
-	opponent_team: ({ opponent_team }) => opponent_team,
+	opponent_team: async ({ opponent_team }, _, { loaders }) => {
+		const teamData = await loaders.teamData.load(opponent_team)
+		return teamData
+	},
 	own_goals: ({ own_goals }) => own_goals,
 	penalties_missed: ({ penalties_missed }) => penalties_missed,
 	penalties_saved: ({ penalties_saved }) => penalties_saved,

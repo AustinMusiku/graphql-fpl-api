@@ -50,7 +50,7 @@ type PastFixture {
 	goals_conceded: Int
 	goals_scored: Int
 	minutes: Int
-	opponent_team: Int
+	opponent_team: Team
 	own_goals: Int
 	penalties_missed: Int
 	penalties_saved: Int
