@@ -9,9 +9,13 @@ export const UpcomingFixture: UpcomingFixtureResolvers = {
 	is_home: ({ is_home }) => is_home,
 	kickoff_time: ({ kickoff_time }) => kickoff_time,
 	minutes: ({ minutes }) => minutes,
-	team_a: ({ team_a }) => team_a,
+	team_a: async ({ team_a }, _, { loaders }) => {
+		return await loaders.teamData.load(team_a)
+	},
 	team_a_difficulty: ({ team_a_difficulty }) => team_a_difficulty,
-	team_h: ({ team_h }) => team_h,
+	team_h: async ({ team_h }, _, { loaders }) => {
+		return await loaders.teamData.load(team_h)
+	},
 	team_h_difficulty: ({ team_h_difficulty }) => team_h_difficulty,
 	finished_provisional: ({ finished_provisional }) => finished_provisional,
 	started: ({ started }) => started,
