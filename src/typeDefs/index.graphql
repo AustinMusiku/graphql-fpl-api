@@ -231,10 +231,10 @@ type Fixture {
 	pulse_id: Int
 	started: Boolean
 	stats: [FixtureStats]
-	team_a: Int
+	team_a: Team
 	team_a_difficulty: Int
 	team_a_score: Int
-	team_h: Int
+	team_h: Team
 	team_h_difficulty: Int
 	team_h_score: Int
 }

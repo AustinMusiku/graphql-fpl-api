@@ -13,10 +13,16 @@ export const Fixture: FixtureResolvers = {
 	pulse_id: ({ pulse_id }) => pulse_id,
 	started: ({ started }) => started,
 	stats: ({ stats }) => stats,
-	team_a: ({ team_a }) => team_a,
+	team_a: async ({ team_a }, _, { loaders }) => {
+		const teamData = await loaders.teamData.load(team_a)
+		return teamData
+	},
 	team_a_difficulty: ({ team_a_difficulty }) => team_a_difficulty,
 	team_a_score: ({ team_a_score }) => team_a_score,
-	team_h: ({ team_h }) => team_h,
+	team_h: async ({ team_h }, _, { loaders }) => {
+		const teamData = await loaders.teamData.load(team_h)
+		return teamData
+	},
 	team_h_difficulty: ({ team_h_difficulty }) => team_h_difficulty,
 	team_h_score: ({ team_h_score }) => team_h_score
 }

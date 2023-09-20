@@ -61,10 +61,10 @@ export type Fixture = {
   pulse_id?: Maybe<Scalars['Int']>;
   started?: Maybe<Scalars['Boolean']>;
   stats?: Maybe<Array<Maybe<FixtureStats>>>;
-  team_a?: Maybe<Scalars['Int']>;
+  team_a?: Maybe<Team>;
   team_a_difficulty?: Maybe<Scalars['Int']>;
   team_a_score?: Maybe<Scalars['Int']>;
-  team_h?: Maybe<Scalars['Int']>;
+  team_h?: Maybe<Team>;
   team_h_difficulty?: Maybe<Scalars['Int']>;
   team_h_score?: Maybe<Scalars['Int']>;
 };
@@ -459,10 +459,10 @@ export type FixtureResolvers<ContextType = any, ParentType extends ResolversPare
   pulse_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   started?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   stats?: Resolver<Maybe<Array<Maybe<ResolversTypes['FixtureStats']>>>, ParentType, ContextType>;
-  team_a?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  team_a?: Resolver<Maybe<ResolversTypes['Team']>, ParentType, ContextType>;
   team_a_difficulty?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   team_a_score?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  team_h?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  team_h?: Resolver<Maybe<ResolversTypes['Team']>, ParentType, ContextType>;
   team_h_difficulty?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   team_h_score?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
