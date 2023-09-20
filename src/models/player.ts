@@ -31,8 +31,8 @@ export type Player = {
 	creativity: number
 	threat: number
 	ict_index: number
-	UpcomingFixtures: UpcomingFixture[]
-	pastFixtures: PastFixture[]
+	upcoming_fixtures: UpcomingFixture[]
+	past_fixtures: PastFixture[]
 	chance_of_playing_this_round: number
 	cost_change_event_fall: number
 	cost_change_start: number
