@@ -1,14 +1,14 @@
-import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
-import { loadSchemaSync } from '@graphql-tools/load'
-import { addResolversToSchema } from '@graphql-tools/schema'
+import { readFileSync } from 'fs'
+import { join } from 'path'
+import { createSchema } from 'graphql-yoga'
 import resolvers from '../resolvers'
 
-// Load typedefs from the file
-const schema = loadSchemaSync('**/*.graphql', {
-	loaders: [new GraphQLFileLoader()]
+const schema = createSchema({
+	typeDefs: readFileSync(
+		join(__dirname, '../typedefs/index.graphql'),
+		'utf8'
+	),
+	resolvers
 })
 
-// Add resolvers to the schema
-const schemaWithResolvers = addResolversToSchema({ schema, resolvers })
-
-export default schemaWithResolvers
+export default schema
