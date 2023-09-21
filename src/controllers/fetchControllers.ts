@@ -54,9 +54,36 @@ class FetchController {
 	async getPlayerEvents(playerId: number) {
 		try {
 			const url = urls.playerById + playerId
-			return await this.fetchFromCache(`${playerId}`, url)
+			return await this.fetchFromCache(`p${playerId}`, url)
 		} catch (err) {
 			console.log(`Error fetching player-${playerId}: ${err}`)
+		}
+	}
+
+	async getManager(managerId: number) {
+		try {
+			const url = urls.manager + managerId
+			return await this.fetchFromCache(`m${managerId}`, url)
+		} catch (err) {
+			console.log(`Error fetching manager-${managerId}: ${err}`)
+		}
+	}
+
+	async getManagerHistory(managerId: number) {
+		try {
+			const url = urls.manager + managerId + '/history/'
+			return await this.fetchFromCache(`mh${managerId}`, url)
+		} catch (err) {
+			console.log(`Error fetching manager-${managerId} history: ${err}`)
+		}
+	}
+
+	async getManagerSquad(managerId: number, gwId: number) {
+		try {
+			const url = urls.manager + managerId + '/event/' + gwId + '/picks/'
+			return await this.fetchFromCache(`ms${managerId}`, url)
+		} catch (err) {
+			console.log(`Error fetching manager-${managerId} squad: ${err}`)
 		}
 	}
 
