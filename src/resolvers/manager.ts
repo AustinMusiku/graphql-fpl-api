@@ -1,11 +1,11 @@
-import fetchControllers from '../controllers/fetchControllers'
 import { ManagerResolvers } from '../types/schema'
 
 export const Manager: ManagerResolvers = {
 	current_event: ({ current_event }) => current_event,
 	favourite_team: ({ favourite_team }) => favourite_team,
-	history: async ({ id }) => {
-		const history = await fetchControllers.getManagerHistory(id)
+	history: async ({ id }, _, { loaders }) => {
+		if (!id) return null
+		const history = await loaders.managerHistory.load(id)
 		return history
 	},
 	id: ({ id }) => id,
@@ -25,8 +25,9 @@ export const Manager: ManagerResolvers = {
 	player_region_iso_code_short: ({ player_region_iso_code_short }) =>
 		player_region_iso_code_short,
 	player_region_name: ({ player_region_name }) => player_region_name,
-	squad: async ({ id }, { gwId }) => {
-		const team = await fetchControllers.getManagerSquad(id, gwId)
+	squad: async ({ id }, { gwId }, { loaders }) => {
+		if (!gwId) return null
+		const team = await loaders.managerSquad.load([id, gwId])
 		return team
 	},
 	started_event: ({ started_event }) => started_event,

@@ -1,9 +1,9 @@
-import fetchControllers from '../controllers/fetchControllers'
 import { LeagueSummaryResolvers } from '../types/schema'
 
 export const LeagueSummary: LeagueSummaryResolvers = {
-	admin_entry: async ({ admin_entry }) => {
-		const adminEntry = await fetchControllers.getManager(admin_entry)
+	admin_entry: async ({ admin_entry }, _, { loaders }) => {
+		if (!admin_entry) return null
+		const adminEntry = await loaders.managerData.load(admin_entry)
 		return adminEntry
 	},
 	closed: ({ closed }) => closed,
