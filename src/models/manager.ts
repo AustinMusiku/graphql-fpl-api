@@ -44,7 +44,7 @@ type ClassicLeagueSummary = {
 	league_type: string
 	scoring: string
 	admin_entry: number | null
-	start_event: 1
+	start_event: number
 	entry_can_leave: boolean
 	entry_can_admin: boolean
 	entry_can_invite: boolean
