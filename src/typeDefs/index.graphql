@@ -9,6 +9,7 @@ type Query {
 	): [Fixture]
 	gameweek(id: Int, is_current: Boolean, is_next: Boolean): GameWeek
 	gameweeks(is_finished: Boolean): [GameWeek]
+	manager(id: Int): Manager
 	player(id: Int): Player
 	players(
 		first: Int
@@ -26,11 +27,17 @@ type Query {
 	teams: [Team]
 }
 
+# ---------------------------------------------------
+# Chip
+# ---------------------------------------------------
 type Chip {
 	chip_name: String
 	num_played: Int
 }
 
+# ---------------------------------------------------
+# GameWeek
+# ---------------------------------------------------
 type GameWeek {
 	avg_points: Int
 	chip_plays: [Chip]
@@ -43,6 +50,9 @@ type GameWeek {
 	is_previous: Boolean
 }
 
+# ---------------------------------------------------
+# PastFixture
+# ---------------------------------------------------
 type PastFixture {
 	assists: Int
 	bps: Int
@@ -66,6 +76,9 @@ type PastFixture {
 	yellow_cards: Int
 }
 
+# ---------------------------------------------------
+# Player
+# ---------------------------------------------------
 type Player {
 	assists: Int
 	bonus: Int
@@ -138,6 +151,7 @@ type Player {
 	selected_rank: Int
 	selected_rank_type: Int
 	special: Boolean
+	squad_Int: Int
 	squad_number: Int
 	starts: Int
 	starts_per_90: Float
@@ -165,6 +179,9 @@ type Player {
 	yellow_cards: Int
 }
 
+# ---------------------------------------------------
+# UpcomingFixture
+# ---------------------------------------------------
 type UpcomingFixture {
 	code: Int
 	difficulty: Int
@@ -183,6 +200,9 @@ type UpcomingFixture {
 	team_h_difficulty: Int
 }
 
+# ---------------------------------------------------
+# Team
+# ---------------------------------------------------
 type Team {
 	code: Int
 	draw: Int
@@ -205,6 +225,9 @@ type Team {
 	win: Int
 }
 
+# ---------------------------------------------------
+# ElementType
+# ---------------------------------------------------
 type ElementType {
 	element_count: Int
 	id: Int
@@ -219,6 +242,9 @@ type ElementType {
 	ui_shirt_specific: Boolean
 }
 
+# ---------------------------------------------------
+# Fixture
+# ---------------------------------------------------
 type Fixture {
 	code: Int
 	event: Int
@@ -248,4 +274,136 @@ type FixtureStats {
 type ElementStats {
 	element: Int
 	value: Int
+}
+
+# ---------------------------------------------------
+# Manager
+# ---------------------------------------------------
+type Manager {
+	current_event: Int
+	favourite_team: Int
+	history: ManagerHistory
+	id: Int
+	joined_time: String
+	last_deadline_bank: Int
+	last_deadline_total_transfers: Int
+	last_deadline_value: Int
+	leagues: ManagerLeagues
+	name: String
+	name_change_blocked: Boolean
+	player_first_name: String
+	player_last_name: String
+	player_region_id: Int
+	player_region_iso_code_long: String
+	player_region_iso_code_short: String
+	player_region_name: String
+	squad(gwId: Int): ManagerSquad
+	started_event: Int
+	summary_event_points: Int
+	summary_event_rank: Int
+	summary_overall_points: Int
+	summary_overall_rank: Int
+}
+
+type ManagerLeagues {
+	classic: [ClassicLeagueSummary]
+	h2h: [H2hLeagueSummary]
+}
+
+type ClassicLeagueSummary {
+	admin_entry: Manager
+	closed: Boolean
+	created: String
+	cup_league: Int
+	cup_qualified: Int
+	entry_can_admin: Boolean
+	entry_can_invite: Boolean
+	entry_can_leave: Boolean
+	entry_last_rank: Int
+	entry_rank: Int
+	has_cup: Boolean
+	id: Int
+	league_type: String
+	max_entries: Int
+	name: String
+	rank: Int
+	scoring: String
+	short_name: String
+	start_event: Int
+}
+
+type H2hLeagueSummary {
+	admin_entry: Manager
+	closed: Boolean
+	created: String
+	cup_league: Int
+	cup_qualified: Int
+	entry_can_admin: Boolean
+	entry_can_invite: Boolean
+	entry_can_leave: Boolean
+	entry_last_rank: Int
+	entry_rank: Int
+	has_cup: Boolean
+	id: Int
+	league_type: String
+	max_entries: Int
+	name: String
+	rank: Int
+	scoring: String
+	short_name: String
+	start_event: Int
+}
+
+type ManagerHistory {
+	chips: [ManagerHistoryChips]
+	current: [ManagerHistoryCurrentSeasonGw]
+	past: [ManagerHistoryPastSeason]
+}
+
+type ManagerHistoryCurrentSeasonGw {
+	bank: Int
+	event: Int
+	event_transfers: Int
+	event_transfers_cost: Int
+	overall_rank: Int
+	points: Int
+	points_on_bench: Int
+	rank: Int
+	rank_sort: Int
+	total_points: Int
+	value: Int
+}
+
+type ManagerHistoryPastSeason {
+	rank: Int
+	season_name: String
+	total_points: Int
+}
+
+type ManagerHistoryChips {
+	event: Int
+	name: String
+	time: String
+}
+
+type ManagerSquad {
+	active_chip: Chip
+	automatic_subs: [AutomaticSub]
+	entry_history: ManagerHistoryCurrentSeasonGw
+	picks: [PlayerPick]
+}
+
+type AutomaticSub {
+	element_in: Player
+	element_out: Player
+	entry: Int
+	event: Int
+}
+
+type PlayerPick {
+	element: Player
+	is_captain: Boolean
+	is_vice_captain: Boolean
+	multiplier: Int
+	position: Int
 }

@@ -12,6 +12,7 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -21,10 +22,41 @@ export type Scalars = {
   Float: number;
 };
 
+export type AutomaticSub = {
+  __typename?: 'AutomaticSub';
+  element_in?: Maybe<Player>;
+  element_out?: Maybe<Player>;
+  entry?: Maybe<Scalars['Int']>;
+  event?: Maybe<Scalars['Int']>;
+};
+
 export type Chip = {
   __typename?: 'Chip';
   chip_name?: Maybe<Scalars['String']>;
   num_played?: Maybe<Scalars['Int']>;
+};
+
+export type ClassicLeagueSummary = {
+  __typename?: 'ClassicLeagueSummary';
+  admin_entry?: Maybe<Manager>;
+  closed?: Maybe<Scalars['Boolean']>;
+  created?: Maybe<Scalars['String']>;
+  cup_league?: Maybe<Scalars['Int']>;
+  cup_qualified?: Maybe<Scalars['Int']>;
+  entry_can_admin?: Maybe<Scalars['Boolean']>;
+  entry_can_invite?: Maybe<Scalars['Boolean']>;
+  entry_can_leave?: Maybe<Scalars['Boolean']>;
+  entry_last_rank?: Maybe<Scalars['Int']>;
+  entry_rank?: Maybe<Scalars['Int']>;
+  has_cup?: Maybe<Scalars['Boolean']>;
+  id?: Maybe<Scalars['Int']>;
+  league_type?: Maybe<Scalars['String']>;
+  max_entries?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  rank?: Maybe<Scalars['Int']>;
+  scoring?: Maybe<Scalars['String']>;
+  short_name?: Maybe<Scalars['String']>;
+  start_event?: Maybe<Scalars['Int']>;
 };
 
 export type ElementStats = {
@@ -87,6 +119,111 @@ export type GameWeek = {
   is_current?: Maybe<Scalars['Boolean']>;
   is_next?: Maybe<Scalars['Boolean']>;
   is_previous?: Maybe<Scalars['Boolean']>;
+};
+
+export type H2hLeagueSummary = {
+  __typename?: 'H2hLeagueSummary';
+  admin_entry?: Maybe<Manager>;
+  closed?: Maybe<Scalars['Boolean']>;
+  created?: Maybe<Scalars['String']>;
+  cup_league?: Maybe<Scalars['Int']>;
+  cup_qualified?: Maybe<Scalars['Int']>;
+  entry_can_admin?: Maybe<Scalars['Boolean']>;
+  entry_can_invite?: Maybe<Scalars['Boolean']>;
+  entry_can_leave?: Maybe<Scalars['Boolean']>;
+  entry_last_rank?: Maybe<Scalars['Int']>;
+  entry_rank?: Maybe<Scalars['Int']>;
+  has_cup?: Maybe<Scalars['Boolean']>;
+  id?: Maybe<Scalars['Int']>;
+  league_type?: Maybe<Scalars['String']>;
+  max_entries?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  rank?: Maybe<Scalars['Int']>;
+  scoring?: Maybe<Scalars['String']>;
+  short_name?: Maybe<Scalars['String']>;
+  start_event?: Maybe<Scalars['Int']>;
+};
+
+export type Manager = {
+  __typename?: 'Manager';
+  current_event?: Maybe<Scalars['Int']>;
+  favourite_team?: Maybe<Scalars['Int']>;
+  history?: Maybe<ManagerHistory>;
+  id?: Maybe<Scalars['Int']>;
+  joined_time?: Maybe<Scalars['String']>;
+  last_deadline_bank?: Maybe<Scalars['Int']>;
+  last_deadline_total_transfers?: Maybe<Scalars['Int']>;
+  last_deadline_value?: Maybe<Scalars['Int']>;
+  leagues?: Maybe<ManagerLeagues>;
+  name?: Maybe<Scalars['String']>;
+  name_change_blocked?: Maybe<Scalars['Boolean']>;
+  player_first_name?: Maybe<Scalars['String']>;
+  player_last_name?: Maybe<Scalars['String']>;
+  player_region_id?: Maybe<Scalars['Int']>;
+  player_region_iso_code_long?: Maybe<Scalars['String']>;
+  player_region_iso_code_short?: Maybe<Scalars['String']>;
+  player_region_name?: Maybe<Scalars['String']>;
+  squad?: Maybe<ManagerSquad>;
+  started_event?: Maybe<Scalars['Int']>;
+  summary_event_points?: Maybe<Scalars['Int']>;
+  summary_event_rank?: Maybe<Scalars['Int']>;
+  summary_overall_points?: Maybe<Scalars['Int']>;
+  summary_overall_rank?: Maybe<Scalars['Int']>;
+};
+
+
+export type ManagerSquadArgs = {
+  gwId?: InputMaybe<Scalars['Int']>;
+};
+
+export type ManagerHistory = {
+  __typename?: 'ManagerHistory';
+  chips?: Maybe<Array<Maybe<ManagerHistoryChips>>>;
+  current?: Maybe<Array<Maybe<ManagerHistoryCurrentSeasonGw>>>;
+  past?: Maybe<Array<Maybe<ManagerHistoryPastSeason>>>;
+};
+
+export type ManagerHistoryChips = {
+  __typename?: 'ManagerHistoryChips';
+  event?: Maybe<Scalars['Int']>;
+  name?: Maybe<Scalars['String']>;
+  time?: Maybe<Scalars['String']>;
+};
+
+export type ManagerHistoryCurrentSeasonGw = {
+  __typename?: 'ManagerHistoryCurrentSeasonGw';
+  bank?: Maybe<Scalars['Int']>;
+  event?: Maybe<Scalars['Int']>;
+  event_transfers?: Maybe<Scalars['Int']>;
+  event_transfers_cost?: Maybe<Scalars['Int']>;
+  overall_rank?: Maybe<Scalars['Int']>;
+  points?: Maybe<Scalars['Int']>;
+  points_on_bench?: Maybe<Scalars['Int']>;
+  rank?: Maybe<Scalars['Int']>;
+  rank_sort?: Maybe<Scalars['Int']>;
+  total_points?: Maybe<Scalars['Int']>;
+  value?: Maybe<Scalars['Int']>;
+};
+
+export type ManagerHistoryPastSeason = {
+  __typename?: 'ManagerHistoryPastSeason';
+  rank?: Maybe<Scalars['Int']>;
+  season_name?: Maybe<Scalars['String']>;
+  total_points?: Maybe<Scalars['Int']>;
+};
+
+export type ManagerLeagues = {
+  __typename?: 'ManagerLeagues';
+  classic?: Maybe<Array<Maybe<ClassicLeagueSummary>>>;
+  h2h?: Maybe<Array<Maybe<H2hLeagueSummary>>>;
+};
+
+export type ManagerSquad = {
+  __typename?: 'ManagerSquad';
+  active_chip?: Maybe<Chip>;
+  automatic_subs?: Maybe<Array<Maybe<AutomaticSub>>>;
+  entry_history?: Maybe<ManagerHistoryCurrentSeasonGw>;
+  picks?: Maybe<Array<Maybe<PlayerPick>>>;
 };
 
 export type PastFixture = {
@@ -186,6 +323,7 @@ export type Player = {
   selected_rank?: Maybe<Scalars['Int']>;
   selected_rank_type?: Maybe<Scalars['Int']>;
   special?: Maybe<Scalars['Boolean']>;
+  squad_Int?: Maybe<Scalars['Int']>;
   squad_number?: Maybe<Scalars['Int']>;
   starts?: Maybe<Scalars['Int']>;
   starts_per_90?: Maybe<Scalars['Float']>;
@@ -216,12 +354,22 @@ export type PlayerUpcoming_FixturesArgs = {
   to?: InputMaybe<Scalars['Int']>;
 };
 
+export type PlayerPick = {
+  __typename?: 'PlayerPick';
+  element?: Maybe<Player>;
+  is_captain?: Maybe<Scalars['Boolean']>;
+  is_vice_captain?: Maybe<Scalars['Boolean']>;
+  multiplier?: Maybe<Scalars['Int']>;
+  position?: Maybe<Scalars['Int']>;
+};
+
 export type Query = {
   __typename?: 'Query';
   element_types?: Maybe<Array<Maybe<ElementType>>>;
   fixtures?: Maybe<Array<Maybe<Fixture>>>;
   gameweek?: Maybe<GameWeek>;
   gameweeks?: Maybe<Array<Maybe<GameWeek>>>;
+  manager?: Maybe<Manager>;
   player?: Maybe<Player>;
   players?: Maybe<Array<Maybe<Player>>>;
   team?: Maybe<Team>;
@@ -247,6 +395,11 @@ export type QueryGameweekArgs = {
 
 export type QueryGameweeksArgs = {
   is_finished?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type QueryManagerArgs = {
+  id?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -309,9 +462,9 @@ export type UpcomingFixture = {
   minutes?: Maybe<Scalars['Int']>;
   pulse_id?: Maybe<Scalars['Int']>;
   started?: Maybe<Scalars['Boolean']>;
-  team_a?: Maybe<Scalars['Int']>;
+  team_a?: Maybe<Team>;
   team_a_difficulty?: Maybe<Scalars['Int']>;
-  team_h?: Maybe<Scalars['Int']>;
+  team_h?: Maybe<Team>;
   team_h_difficulty?: Maybe<Scalars['Int']>;
 };
 
@@ -384,17 +537,28 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  AutomaticSub: ResolverTypeWrapper<Omit<AutomaticSub, 'element_in' | 'element_out'> & { element_in?: Maybe<ResolversTypes['Player']>, element_out?: Maybe<ResolversTypes['Player']> }>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Chip: ResolverTypeWrapper<ChipModel>;
+  ClassicLeagueSummary: ResolverTypeWrapper<Omit<ClassicLeagueSummary, 'admin_entry'> & { admin_entry?: Maybe<ResolversTypes['Manager']> }>;
   ElementStats: ResolverTypeWrapper<ElementStats>;
   ElementType: ResolverTypeWrapper<ElementTypeModel>;
   Fixture: ResolverTypeWrapper<FixtureModel>;
   FixtureStats: ResolverTypeWrapper<FixtureStats>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
   GameWeek: ResolverTypeWrapper<GameWeekModel>;
+  H2hLeagueSummary: ResolverTypeWrapper<Omit<H2hLeagueSummary, 'admin_entry'> & { admin_entry?: Maybe<ResolversTypes['Manager']> }>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
+  Manager: ResolverTypeWrapper<Omit<Manager, 'leagues' | 'squad'> & { leagues?: Maybe<ResolversTypes['ManagerLeagues']>, squad?: Maybe<ResolversTypes['ManagerSquad']> }>;
+  ManagerHistory: ResolverTypeWrapper<ManagerHistory>;
+  ManagerHistoryChips: ResolverTypeWrapper<ManagerHistoryChips>;
+  ManagerHistoryCurrentSeasonGw: ResolverTypeWrapper<ManagerHistoryCurrentSeasonGw>;
+  ManagerHistoryPastSeason: ResolverTypeWrapper<ManagerHistoryPastSeason>;
+  ManagerLeagues: ResolverTypeWrapper<Omit<ManagerLeagues, 'classic' | 'h2h'> & { classic?: Maybe<Array<Maybe<ResolversTypes['ClassicLeagueSummary']>>>, h2h?: Maybe<Array<Maybe<ResolversTypes['H2hLeagueSummary']>>> }>;
+  ManagerSquad: ResolverTypeWrapper<Omit<ManagerSquad, 'active_chip' | 'automatic_subs' | 'picks'> & { active_chip?: Maybe<ResolversTypes['Chip']>, automatic_subs?: Maybe<Array<Maybe<ResolversTypes['AutomaticSub']>>>, picks?: Maybe<Array<Maybe<ResolversTypes['PlayerPick']>>> }>;
   PastFixture: ResolverTypeWrapper<PastFixtureModel>;
   Player: ResolverTypeWrapper<PlayerModel>;
+  PlayerPick: ResolverTypeWrapper<Omit<PlayerPick, 'element'> & { element?: Maybe<ResolversTypes['Player']> }>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Team: ResolverTypeWrapper<TeamModel>;
@@ -403,26 +567,68 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
+  AutomaticSub: Omit<AutomaticSub, 'element_in' | 'element_out'> & { element_in?: Maybe<ResolversParentTypes['Player']>, element_out?: Maybe<ResolversParentTypes['Player']> };
   Boolean: Scalars['Boolean'];
   Chip: ChipModel;
+  ClassicLeagueSummary: Omit<ClassicLeagueSummary, 'admin_entry'> & { admin_entry?: Maybe<ResolversParentTypes['Manager']> };
   ElementStats: ElementStats;
   ElementType: ElementTypeModel;
   Fixture: FixtureModel;
   FixtureStats: FixtureStats;
   Float: Scalars['Float'];
   GameWeek: GameWeekModel;
+  H2hLeagueSummary: Omit<H2hLeagueSummary, 'admin_entry'> & { admin_entry?: Maybe<ResolversParentTypes['Manager']> };
   Int: Scalars['Int'];
+  Manager: Omit<Manager, 'leagues' | 'squad'> & { leagues?: Maybe<ResolversParentTypes['ManagerLeagues']>, squad?: Maybe<ResolversParentTypes['ManagerSquad']> };
+  ManagerHistory: ManagerHistory;
+  ManagerHistoryChips: ManagerHistoryChips;
+  ManagerHistoryCurrentSeasonGw: ManagerHistoryCurrentSeasonGw;
+  ManagerHistoryPastSeason: ManagerHistoryPastSeason;
+  ManagerLeagues: Omit<ManagerLeagues, 'classic' | 'h2h'> & { classic?: Maybe<Array<Maybe<ResolversParentTypes['ClassicLeagueSummary']>>>, h2h?: Maybe<Array<Maybe<ResolversParentTypes['H2hLeagueSummary']>>> };
+  ManagerSquad: Omit<ManagerSquad, 'active_chip' | 'automatic_subs' | 'picks'> & { active_chip?: Maybe<ResolversParentTypes['Chip']>, automatic_subs?: Maybe<Array<Maybe<ResolversParentTypes['AutomaticSub']>>>, picks?: Maybe<Array<Maybe<ResolversParentTypes['PlayerPick']>>> };
   PastFixture: PastFixtureModel;
   Player: PlayerModel;
+  PlayerPick: Omit<PlayerPick, 'element'> & { element?: Maybe<ResolversParentTypes['Player']> };
   Query: {};
   String: Scalars['String'];
   Team: TeamModel;
   UpcomingFixture: UpcomingFixtureModel;
 };
 
+export type AutomaticSubResolvers<ContextType = any, ParentType extends ResolversParentTypes['AutomaticSub'] = ResolversParentTypes['AutomaticSub']> = {
+  element_in?: Resolver<Maybe<ResolversTypes['Player']>, ParentType, ContextType>;
+  element_out?: Resolver<Maybe<ResolversTypes['Player']>, ParentType, ContextType>;
+  entry?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  event?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type ChipResolvers<ContextType = any, ParentType extends ResolversParentTypes['Chip'] = ResolversParentTypes['Chip']> = {
   chip_name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   num_played?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ClassicLeagueSummaryResolvers<ContextType = any, ParentType extends ResolversParentTypes['ClassicLeagueSummary'] = ResolversParentTypes['ClassicLeagueSummary']> = {
+  admin_entry?: Resolver<Maybe<ResolversTypes['Manager']>, ParentType, ContextType>;
+  closed?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  created?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  cup_league?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  cup_qualified?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  entry_can_admin?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  entry_can_invite?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  entry_can_leave?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  entry_last_rank?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  entry_rank?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  has_cup?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  league_type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  max_entries?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  rank?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  scoring?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  short_name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  start_event?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -485,6 +691,106 @@ export type GameWeekResolvers<ContextType = any, ParentType extends ResolversPar
   is_current?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   is_next?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   is_previous?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type H2hLeagueSummaryResolvers<ContextType = any, ParentType extends ResolversParentTypes['H2hLeagueSummary'] = ResolversParentTypes['H2hLeagueSummary']> = {
+  admin_entry?: Resolver<Maybe<ResolversTypes['Manager']>, ParentType, ContextType>;
+  closed?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  created?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  cup_league?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  cup_qualified?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  entry_can_admin?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  entry_can_invite?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  entry_can_leave?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  entry_last_rank?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  entry_rank?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  has_cup?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  league_type?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  max_entries?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  rank?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  scoring?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  short_name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  start_event?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ManagerResolvers<ContextType = any, ParentType extends ResolversParentTypes['Manager'] = ResolversParentTypes['Manager']> = {
+  current_event?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  favourite_team?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  history?: Resolver<Maybe<ResolversTypes['ManagerHistory']>, ParentType, ContextType>;
+  id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  joined_time?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  last_deadline_bank?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  last_deadline_total_transfers?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  last_deadline_value?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  leagues?: Resolver<Maybe<ResolversTypes['ManagerLeagues']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name_change_blocked?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  player_first_name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  player_last_name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  player_region_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  player_region_iso_code_long?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  player_region_iso_code_short?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  player_region_name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  squad?: Resolver<Maybe<ResolversTypes['ManagerSquad']>, ParentType, ContextType, Partial<ManagerSquadArgs>>;
+  started_event?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  summary_event_points?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  summary_event_rank?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  summary_overall_points?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  summary_overall_rank?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ManagerHistoryResolvers<ContextType = any, ParentType extends ResolversParentTypes['ManagerHistory'] = ResolversParentTypes['ManagerHistory']> = {
+  chips?: Resolver<Maybe<Array<Maybe<ResolversTypes['ManagerHistoryChips']>>>, ParentType, ContextType>;
+  current?: Resolver<Maybe<Array<Maybe<ResolversTypes['ManagerHistoryCurrentSeasonGw']>>>, ParentType, ContextType>;
+  past?: Resolver<Maybe<Array<Maybe<ResolversTypes['ManagerHistoryPastSeason']>>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ManagerHistoryChipsResolvers<ContextType = any, ParentType extends ResolversParentTypes['ManagerHistoryChips'] = ResolversParentTypes['ManagerHistoryChips']> = {
+  event?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  time?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ManagerHistoryCurrentSeasonGwResolvers<ContextType = any, ParentType extends ResolversParentTypes['ManagerHistoryCurrentSeasonGw'] = ResolversParentTypes['ManagerHistoryCurrentSeasonGw']> = {
+  bank?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  event?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  event_transfers?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  event_transfers_cost?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  overall_rank?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  points?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  points_on_bench?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  rank?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  rank_sort?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  total_points?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  value?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ManagerHistoryPastSeasonResolvers<ContextType = any, ParentType extends ResolversParentTypes['ManagerHistoryPastSeason'] = ResolversParentTypes['ManagerHistoryPastSeason']> = {
+  rank?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  season_name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  total_points?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ManagerLeaguesResolvers<ContextType = any, ParentType extends ResolversParentTypes['ManagerLeagues'] = ResolversParentTypes['ManagerLeagues']> = {
+  classic?: Resolver<Maybe<Array<Maybe<ResolversTypes['ClassicLeagueSummary']>>>, ParentType, ContextType>;
+  h2h?: Resolver<Maybe<Array<Maybe<ResolversTypes['H2hLeagueSummary']>>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ManagerSquadResolvers<ContextType = any, ParentType extends ResolversParentTypes['ManagerSquad'] = ResolversParentTypes['ManagerSquad']> = {
+  active_chip?: Resolver<Maybe<ResolversTypes['Chip']>, ParentType, ContextType>;
+  automatic_subs?: Resolver<Maybe<Array<Maybe<ResolversTypes['AutomaticSub']>>>, ParentType, ContextType>;
+  entry_history?: Resolver<Maybe<ResolversTypes['ManagerHistoryCurrentSeasonGw']>, ParentType, ContextType>;
+  picks?: Resolver<Maybe<Array<Maybe<ResolversTypes['PlayerPick']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -584,6 +890,7 @@ export type PlayerResolvers<ContextType = any, ParentType extends ResolversParen
   selected_rank?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   selected_rank_type?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   special?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  squad_Int?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   squad_number?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   starts?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   starts_per_90?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>;
@@ -606,11 +913,21 @@ export type PlayerResolvers<ContextType = any, ParentType extends ResolversParen
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type PlayerPickResolvers<ContextType = any, ParentType extends ResolversParentTypes['PlayerPick'] = ResolversParentTypes['PlayerPick']> = {
+  element?: Resolver<Maybe<ResolversTypes['Player']>, ParentType, ContextType>;
+  is_captain?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  is_vice_captain?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  multiplier?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  position?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   element_types?: Resolver<Maybe<Array<Maybe<ResolversTypes['ElementType']>>>, ParentType, ContextType>;
   fixtures?: Resolver<Maybe<Array<Maybe<ResolversTypes['Fixture']>>>, ParentType, ContextType, Partial<QueryFixturesArgs>>;
   gameweek?: Resolver<Maybe<ResolversTypes['GameWeek']>, ParentType, ContextType, Partial<QueryGameweekArgs>>;
   gameweeks?: Resolver<Maybe<Array<Maybe<ResolversTypes['GameWeek']>>>, ParentType, ContextType, Partial<QueryGameweeksArgs>>;
+  manager?: Resolver<Maybe<ResolversTypes['Manager']>, ParentType, ContextType, Partial<QueryManagerArgs>>;
   player?: Resolver<Maybe<ResolversTypes['Player']>, ParentType, ContextType, Partial<QueryPlayerArgs>>;
   players?: Resolver<Maybe<Array<Maybe<ResolversTypes['Player']>>>, ParentType, ContextType, Partial<QueryPlayersArgs>>;
   team?: Resolver<Maybe<ResolversTypes['Team']>, ParentType, ContextType, Partial<QueryTeamArgs>>;
@@ -652,22 +969,33 @@ export type UpcomingFixtureResolvers<ContextType = any, ParentType extends Resol
   minutes?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   pulse_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   started?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  team_a?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  team_a?: Resolver<Maybe<ResolversTypes['Team']>, ParentType, ContextType>;
   team_a_difficulty?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  team_h?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  team_h?: Resolver<Maybe<ResolversTypes['Team']>, ParentType, ContextType>;
   team_h_difficulty?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type Resolvers<ContextType = any> = {
+  AutomaticSub?: AutomaticSubResolvers<ContextType>;
   Chip?: ChipResolvers<ContextType>;
+  ClassicLeagueSummary?: ClassicLeagueSummaryResolvers<ContextType>;
   ElementStats?: ElementStatsResolvers<ContextType>;
   ElementType?: ElementTypeResolvers<ContextType>;
   Fixture?: FixtureResolvers<ContextType>;
   FixtureStats?: FixtureStatsResolvers<ContextType>;
   GameWeek?: GameWeekResolvers<ContextType>;
+  H2hLeagueSummary?: H2hLeagueSummaryResolvers<ContextType>;
+  Manager?: ManagerResolvers<ContextType>;
+  ManagerHistory?: ManagerHistoryResolvers<ContextType>;
+  ManagerHistoryChips?: ManagerHistoryChipsResolvers<ContextType>;
+  ManagerHistoryCurrentSeasonGw?: ManagerHistoryCurrentSeasonGwResolvers<ContextType>;
+  ManagerHistoryPastSeason?: ManagerHistoryPastSeasonResolvers<ContextType>;
+  ManagerLeagues?: ManagerLeaguesResolvers<ContextType>;
+  ManagerSquad?: ManagerSquadResolvers<ContextType>;
   PastFixture?: PastFixtureResolvers<ContextType>;
   Player?: PlayerResolvers<ContextType>;
+  PlayerPick?: PlayerPickResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Team?: TeamResolvers<ContextType>;
   UpcomingFixture?: UpcomingFixtureResolvers<ContextType>;
