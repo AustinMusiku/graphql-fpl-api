@@ -1,10 +1,10 @@
 export type ManagerHistory = {
-	current: Gameweek[]
+	current: PastGameweek[]
 	past: PastSeason[]
-	chips: Chip[]
+	chips: GwChip[]
 }
 
-export type Gameweek = {
+export type PastGameweek = {
 	event: number
 	points: number
 	total_points: number
@@ -18,13 +18,13 @@ export type Gameweek = {
 	points_on_bench: number
 }
 
-type PastSeason = {
+export type PastSeason = {
 	season_name: string
 	total_points: number
 	rank: number
 }
 
-type Chip = {
+export type GwChip = {
 	name: string
 	time: string
 	event: number

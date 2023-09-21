@@ -306,33 +306,11 @@ type Manager {
 }
 
 type ManagerLeagues {
-	classic: [ClassicLeagueSummary]
-	h2h: [H2hLeagueSummary]
+	classic: [LeagueSummary]
+	h2h: [LeagueSummary]
 }
 
-type ClassicLeagueSummary {
-	admin_entry: Manager
-	closed: Boolean
-	created: String
-	cup_league: Int
-	cup_qualified: Int
-	entry_can_admin: Boolean
-	entry_can_invite: Boolean
-	entry_can_leave: Boolean
-	entry_last_rank: Int
-	entry_rank: Int
-	has_cup: Boolean
-	id: Int
-	league_type: String
-	max_entries: Int
-	name: String
-	rank: Int
-	scoring: String
-	short_name: String
-	start_event: Int
-}
-
-type H2hLeagueSummary {
+type LeagueSummary {
 	admin_entry: Manager
 	closed: Boolean
 	created: String
@@ -356,11 +334,11 @@ type H2hLeagueSummary {
 
 type ManagerHistory {
 	chips: [ManagerHistoryChips]
-	current: [ManagerHistoryCurrentSeasonGw]
+	current: [PastGameweek]
 	past: [ManagerHistoryPastSeason]
 }
 
-type ManagerHistoryCurrentSeasonGw {
+type PastGameweek {
 	bank: Int
 	event: Int
 	event_transfers: Int
@@ -387,10 +365,10 @@ type ManagerHistoryChips {
 }
 
 type ManagerSquad {
-	active_chip: Chip
+	active_chip: String
 	automatic_subs: [AutomaticSub]
-	entry_history: ManagerHistoryCurrentSeasonGw
-	picks: [PlayerPick]
+	entry_history: PastGameweek
+	picks: [Pick]
 }
 
 type AutomaticSub {
@@ -400,7 +378,7 @@ type AutomaticSub {
 	event: Int
 }
 
-type PlayerPick {
+type Pick {
 	element: Player
 	is_captain: Boolean
 	is_vice_captain: Boolean

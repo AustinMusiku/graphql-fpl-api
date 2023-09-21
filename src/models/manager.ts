@@ -20,8 +20,8 @@ export type Manager = {
 	squad: ManagerSquad
 	current_event: number
 	leagues: {
-		classic: ClassicLeagueSummary[]
-		h2h: H2hLeagueSummary[]
+		classic: LeagueSummary[]
+		h2h: LeagueSummary[]
 		cup: CupSummary
 		cup_matches: []
 	}
@@ -33,7 +33,7 @@ export type Manager = {
 	last_deadline_total_transfers: number
 }
 
-type ClassicLeagueSummary = {
+export type LeagueSummary = {
 	id: number
 	name: string
 	short_name: string
@@ -44,28 +44,6 @@ type ClassicLeagueSummary = {
 	league_type: string
 	scoring: string
 	admin_entry: number | null
-	start_event: number
-	entry_can_leave: boolean
-	entry_can_admin: boolean
-	entry_can_invite: boolean
-	has_cup: boolean
-	cup_league: number | null
-	cup_qualified: number | null
-	entry_rank: number
-	entry_last_rank: number
-}
-
-type H2hLeagueSummary = {
-	id: number
-	name: string
-	short_name: null
-	created: string
-	closed: boolean
-	rank: number | null
-	max_entries: number | null
-	league_type: string
-	scoring: string
-	admin_entry: number
 	start_event: number
 	entry_can_leave: boolean
 	entry_can_admin: boolean

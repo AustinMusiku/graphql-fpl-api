@@ -1,19 +1,20 @@
-import { Gameweek } from './managerHistory'
+import { PastGameweek } from './managerHistory'
 
 export type ManagerSquad = {
 	active_chip: string | null
 	automatic_subs: AutomaticSub[]
-	entry_history: Gameweek[]
-	picks: Player[]
+	entry_history: PastGameweek
+	picks: Pick[]
 }
-type AutomaticSub = {
+
+export type AutomaticSub = {
 	entry: number
 	element_in: number
 	element_out: number
 	event: number
 }
 
-type Player = {
+export type Pick = {
 	element: number
 	position: number
 	multiplier: number

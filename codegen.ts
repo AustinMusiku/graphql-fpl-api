@@ -16,7 +16,16 @@ const config: CodegenConfig = {
 					UpcomingFixture: '@/models/upcomingFixture#UpcomingFixture',
 					Team: '@/models/team#Team',
 					ElementType: '@/models/elementType#ElementType',
-					Fixture: '@/models/fixture#Fixture'
+					Fixture: '@/models/fixture#Fixture',
+					Manager: '@/models/manager#Manager',
+					LeagueSummary: '@/models/manager#LeagueSummary',
+					ManagerSquad: '@/models/managerSquad#ManagerSquad',
+					AutomaticSub: '@/models/managerSquad#AutomaticSub',
+					Pick: '@/models/managerSquad#Pick',
+					PastGameweek: '@/models/managerHistory#PastGameweek',
+					MangerHistory: '@/models/managerHistory#ManagerHistory',
+					GwChip: '@/models/managerHistory#GwChip',
+					PastSeason: '@/models/managerHistory#PastSeason'
 				}
 			}
 		}

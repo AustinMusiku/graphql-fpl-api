@@ -8,6 +8,14 @@ import { Team } from './team'
 import { ElementType } from './elementType'
 import { Fixture } from './fixture'
 import { Manager } from './manager'
+import { LeagueSummary } from './leagueSummary'
+import { ManagerSquad } from './managerSquad'
+import { AutomaticSub } from './automaticSub'
+import { Pick } from './pick'
+import { PastGameweek } from './pastGameweek'
+import { ManagerHistory } from './managerHistory'
+import { ManagerHistoryChips } from './managerHistoryChips'
+import { ManagerHistoryPastSeason } from './managerHistoryPastSeason'
 
 export default {
 	Query,
@@ -19,5 +27,13 @@ export default {
 	Team,
 	ElementType,
 	Fixture,
-	Manager
+	Manager,
+	LeagueSummary,
+	ManagerSquad,
+	AutomaticSub,
+	Pick,
+	PastGameweek,
+	ManagerHistory,
+	ManagerHistoryChips,
+	ManagerHistoryPastSeason
 }
