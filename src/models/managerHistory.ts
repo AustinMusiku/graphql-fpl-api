@@ -4,7 +4,7 @@ export type ManagerHistory = {
 	chips: Chip[]
 }
 
-type Gameweek = {
+export type Gameweek = {
 	event: number
 	points: number
 	total_points: number
