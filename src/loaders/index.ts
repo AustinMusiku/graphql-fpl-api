@@ -46,5 +46,29 @@ export const loaders = {
 				key
 			)
 		})
-	})
+	}),
+	managerData: new dataLoader(async (keys: readonly number[]) => {
+		return keys.map(async (key) => {
+			return await fetchController.getManager.call(fetchController, key)
+		})
+	}),
+	managerHistory: new dataLoader(async (keys: readonly number[]) => {
+		return keys.map(async (key) => {
+			return await fetchController.getManagerHistory.call(
+				fetchController,
+				key
+			)
+		})
+	}),
+
+	managerSquad: new dataLoader(
+		async (keyPairs: readonly [number, number][]) => {
+			return keyPairs.map(async (keyPair) => {
+				return await fetchController.getManagerSquad.call(
+					fetchController,
+					...keyPair
+				)
+			})
+		}
+	)
 }
