@@ -4,5 +4,6 @@ export const urls = {
 	teams: 'https://fantasy.premierleague.com/api/teams/',
 	playerById: 'https://fantasy.premierleague.com/api/element-summary/',
 	gameweekLive:
-		'https://fantasy.premierleague.com/api/https://fantasy.premierleague.com/api/event/{event_id}/live/'
+		'https://fantasy.premierleague.com/api/https://fantasy.premierleague.com/api/event/{event_id}/live/',
+	manager: 'https://fantasy.premierleague.com/api/entry/'
 }
