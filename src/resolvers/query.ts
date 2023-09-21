@@ -150,5 +150,9 @@ export const Query: QueryResolvers = {
 		}
 
 		return fixtures
+	},
+	manager: async (_: unknown, { id }: { id: number }) => {
+		const manager = await fetchController.getManager(id)
+		return manager
 	}
 }

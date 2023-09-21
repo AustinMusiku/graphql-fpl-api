@@ -7,6 +7,7 @@ import { UpcomingFixture } from './upcomingFixture'
 import { Team } from './team'
 import { ElementType } from './elementType'
 import { Fixture } from './fixture'
+import { Manager } from './manager'
 
 export default {
 	Query,
@@ -17,5 +18,6 @@ export default {
 	UpcomingFixture,
 	Team,
 	ElementType,
-	Fixture
+	Fixture,
+	Manager
 }
