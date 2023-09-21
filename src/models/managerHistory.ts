@@ -19,11 +19,9 @@ export type Gameweek = {
 }
 
 type PastSeason = {
-	element: number
-	position: number
-	multiplier: number
-	is_captain: boolean
-	is_vice_captain: boolean
+	season_name: string
+	total_points: number
+	rank: number
 }
 
 type Chip = {
