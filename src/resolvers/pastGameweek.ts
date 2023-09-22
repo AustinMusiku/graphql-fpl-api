@@ -1,6 +1,6 @@
-import { ManagerHistoryPastGameweekResolvers as MHCPGResolvers } from '../types/schema'
+import { PastGameweekResolvers } from '../types/schema'
 
-export const PastGameweek: MHCPGResolvers = {
+export const PastGameweek: PastGameweekResolvers = {
 	bank: ({ bank }) => bank,
 	event: ({ event }) => event,
 	event_transfers: ({ event_transfers }) => event_transfers,
