@@ -1,5 +1,5 @@
 import { ManagerHistory } from './managerHistory'
-import { ManagerSquad } from './ManagerSquad'
+import { ManagerSquad } from './managerSquad'
 
 export type Manager = {
 	id: number
