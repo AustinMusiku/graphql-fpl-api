@@ -11,7 +11,7 @@ import { Manager } from './manager'
 import { LeagueSummary } from './leagueSummary'
 import { ManagerSquad } from './managerSquad'
 import { AutomaticSub } from './automaticSub'
-import { Pick } from './pick'
+import { SquadPick } from './squadPick'
 import { PastGameweek } from './pastGameweek'
 import { ManagerHistory } from './managerHistory'
 import { ManagerHistoryChips } from './managerHistoryChips'
@@ -31,7 +31,7 @@ export default {
 	LeagueSummary,
 	ManagerSquad,
 	AutomaticSub,
-	Pick,
+	SquadPick,
 	PastGameweek,
 	ManagerHistory,
 	ManagerHistoryChips,

@@ -4,7 +4,7 @@ export type ManagerSquad = {
 	active_chip: string | null
 	automatic_subs: AutomaticSub[]
 	entry_history: PastGameweek
-	picks: Pick[]
+	picks: SquadPick[]
 }
 
 export type AutomaticSub = {
@@ -14,7 +14,7 @@ export type AutomaticSub = {
 	event: number
 }
 
-export type Pick = {
+export type SquadPick = {
 	element: number
 	position: number
 	multiplier: number

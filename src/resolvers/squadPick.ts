@@ -1,6 +1,6 @@
-import { PickResolvers } from '../types/schema'
+import { SquadPickResolvers } from '../types/schema'
 
-export const Pick: PickResolvers = {
+export const SquadPick: SquadPickResolvers = {
 	element: async ({ element }, _, { loaders }) => {
 		const player = loaders.playerData.load(element)
 		return player

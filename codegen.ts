@@ -21,7 +21,7 @@ const config: CodegenConfig = {
 					LeagueSummary: '@/models/manager#LeagueSummary',
 					ManagerSquad: '@/models/managerSquad#ManagerSquad',
 					AutomaticSub: '@/models/managerSquad#AutomaticSub',
-					Pick: '@/models/managerSquad#Pick',
+					SquadPick: '@/models/managerSquad#SquadPick',
 					PastGameweek: '@/models/managerHistory#PastGameweek',
 					MangerHistory: '@/models/managerHistory#ManagerHistory',
 					GwChip: '@/models/managerHistory#GwChip',

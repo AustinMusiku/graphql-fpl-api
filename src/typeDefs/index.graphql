@@ -368,7 +368,7 @@ type ManagerSquad {
 	active_chip: String
 	automatic_subs: [AutomaticSub]
 	entry_history: PastGameweek
-	picks: [Pick]
+	picks: [SquadPick]
 }
 
 type AutomaticSub {
@@ -378,7 +378,7 @@ type AutomaticSub {
 	event: Int
 }
 
-type Pick {
+type SquadPick {
 	element: Player
 	is_captain: Boolean
 	is_vice_captain: Boolean
