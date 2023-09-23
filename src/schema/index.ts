@@ -5,7 +5,7 @@ import resolvers from '../resolvers'
 
 const schema = createSchema({
 	typeDefs: readFileSync(
-		join(__dirname, '../typedefs/index.graphql'),
+		join(__dirname, '../typeDefs/index.graphql'),
 		'utf8'
 	),
 	resolvers
