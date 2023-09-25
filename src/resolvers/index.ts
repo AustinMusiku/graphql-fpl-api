@@ -16,6 +16,8 @@ import { PastGameweek } from './pastGameweek'
 import { ManagerHistory } from './managerHistory'
 import { ManagerHistoryChips } from './managerHistoryChips'
 import { ManagerHistoryPastSeason } from './managerHistoryPastSeason'
+import * as ClassicLeague from './classicLeague'
+import * as H2hLeague from './h2hLeague'
 
 export default {
 	Query,
@@ -35,5 +37,7 @@ export default {
 	PastGameweek,
 	ManagerHistory,
 	ManagerHistoryChips,
-	ManagerHistoryPastSeason
+	ManagerHistoryPastSeason,
+	...ClassicLeague,
+	...H2hLeague
 }

@@ -154,5 +154,13 @@ export const Query: QueryResolvers = {
 	manager: async (_: unknown, { id }: { id: number }) => {
 		const manager = await fetchController.getManager(id)
 		return manager
+	},
+	classic_league: async (_: unknown, { id }: { id: number }) => {
+		const league = await fetchController.getClassicLeague(id)
+		return league
+	},
+	h2h_league: async (_: unknown, { id }: { id: number }) => {
+		const league = await fetchController.getH2hLeague(id)
+		return league
 	}
 }
