@@ -38,9 +38,7 @@ const config: CodegenConfig = {
 					H2hLeagueStandings: '@/models/h2hLeague#H2hLeagueStandings',
 					H2hLeagueStanding: '@/models/h2hLeague#H2hLeagueStanding',
 					NewEntries: '@/models/classicLeague#NewEntries',
-					NewEntry: '@/models/classicLeague#NewEntry',
-					LeagueMeta: '@/models/classicLeague#LeagueMeta',
-					Standing: '@/models/classicLeague#Standing'
+					NewEntry: '@/models/classicLeague#NewEntry'
 				}
 			}
 		}
