@@ -87,6 +87,24 @@ class FetchController {
 		}
 	}
 
+	async getClassicLeague(id: number) {
+		try {
+			const url = urls.classicLeague + id + '/standings/'
+			return await this.fetchFromCache(`cl${id}`, url)
+		} catch (err) {
+			console.log(`Error fetching classic-league ${id}: ${err}`)
+		}
+	}
+
+	async getH2hLeague(id: number) {
+		try {
+			const url = urls.h2hLeague + id + '/standings/'
+			return await this.fetchFromCache(`hl${id}`, url)
+		} catch (err) {
+			console.log(`Error fetching h2h-league ${id}: ${err}`)
+		}
+	}
+
 	// -------------------------------------------------------------------
 	async getAllPlayers() {
 		try {
