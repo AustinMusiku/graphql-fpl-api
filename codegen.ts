@@ -25,7 +25,22 @@ const config: CodegenConfig = {
 					PastGameweek: '@/models/managerHistory#PastGameweek',
 					MangerHistory: '@/models/managerHistory#ManagerHistory',
 					GwChip: '@/models/managerHistory#GwChip',
-					PastSeason: '@/models/managerHistory#PastSeason'
+					PastSeason: '@/models/managerHistory#PastSeason',
+					ClassicLeague: '@/models/classicLeague#ClassicLeague',
+					ClassicLeagueMeta:
+						'@/models/classicLeague#ClassicLeagueMeta',
+					ClassicLeagueStandings:
+						'@/models/classicLeague#ClassicLeagueStandings',
+					ClassicLeagueStanding:
+						'@/models/classicLeague#ClassicLeagueStanding',
+					H2hLeague: '@/models/h2hLeague#H2hLeague',
+					H2hLeagueMeta: '@/models/h2hLeague#H2hLeagueMeta',
+					H2hLeagueStandings: '@/models/h2hLeague#H2hLeagueStandings',
+					H2hLeagueStanding: '@/models/h2hLeague#H2hLeagueStanding',
+					NewEntries: '@/models/classicLeague#NewEntries',
+					NewEntry: '@/models/classicLeague#NewEntry',
+					LeagueMeta: '@/models/classicLeague#LeagueMeta',
+					Standing: '@/models/classicLeague#Standing'
 				}
 			}
 		}

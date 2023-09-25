@@ -1,4 +1,5 @@
 type Query {
+	classic_league(id: Int): ClassicLeague
 	element_types: [ElementType]
 	fixtures(
 		gw: Int
@@ -9,6 +10,7 @@ type Query {
 	): [Fixture]
 	gameweek(id: Int, is_current: Boolean, is_next: Boolean): GameWeek
 	gameweeks(is_finished: Boolean): [GameWeek]
+	h2h_league(id: Int): H2hLeague
 	manager(id: Int): Manager
 	player(id: Int): Player
 	players(
@@ -384,4 +386,111 @@ type SquadPick {
 	is_vice_captain: Boolean
 	multiplier: Int
 	position: Int
+}
+
+# ---------------------------------------------------
+# Classic League
+# ---------------------------------------------------
+type ClassicLeague {
+	last_updated_data: String
+	league: ClassicLeagueMeta
+	new_entries: NewEntries
+	standings: ClassicLeagueStandings
+}
+
+type ClassicLeagueMeta {
+	admin_entry: Int
+	closed: Boolean
+	code_privacy: String
+	created: String
+	cup_league: Int
+	has_cup: Boolean
+	id: Int
+	league_type: String
+	max_entries: Int
+	name: String
+	rank: Int
+	scoring: String
+	start_event: Int
+}
+
+type ClassicLeagueStandings {
+	has_next: Boolean
+	page: Int
+	results: [ClassicLeagueStanding]
+}
+
+type ClassicLeagueStanding {
+	entry: Int
+	entry_name: String
+	event_total: Int
+	id: Int
+	last_rank: Int
+	player_name: String
+	rank: Int
+	rank_sort: Int
+	total: Int
+}
+
+type NewEntries {
+	has_next: Boolean
+	page: Int
+	results: [NewEntry]
+}
+
+type NewEntry {
+	entry: Int
+	entry_name: String
+	joined_time: String
+	player_first_name: String
+	player_last_name: String
+}
+
+# ---------------------------------------------------
+# H2H League
+# ---------------------------------------------------
+type H2hLeague {
+	last_updated_data: String
+	league: H2hLeagueMeta
+	new_entries: NewEntries
+	standings: H2hLeagueStandings
+}
+
+type H2hLeagueMeta {
+	admin_entry: Int
+	closed: Boolean
+	code_privacy: String
+	created: String
+	cup_league: Int
+	has_cup: Boolean
+	id: Int
+	ko_rounds: Int
+	league_type: String
+	max_entries: Int
+	name: String
+	scoring: String
+	start_event: Int
+}
+
+type H2hLeagueStandings {
+	has_next: Boolean
+	page: Int
+	results: [H2hLeagueStanding]
+}
+
+type H2hLeagueStanding {
+	division: Int
+	entry: Int
+	entry_name: String
+	id: Int
+	last_rank: Int
+	matches_drawn: Int
+	matches_lost: Int
+	matches_played: Int
+	matches_won: Int
+	player_name: String
+	points_for: Int
+	rank: Int
+	rank_sort: Int
+	total: Int
 }
