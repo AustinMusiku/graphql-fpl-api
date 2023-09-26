@@ -23,9 +23,7 @@ const config: CodegenConfig = {
 					AutomaticSub: '@/models/managerSquad#AutomaticSub',
 					SquadPick: '@/models/managerSquad#SquadPick',
 					PastGameweek: '@/models/managerHistory#PastGameweek',
-					MangerHistory: '@/models/managerHistory#ManagerHistory',
-					GwChip: '@/models/managerHistory#GwChip',
-					PastSeason: '@/models/managerHistory#PastSeason',
+					ManagerHistory: '@/models/managerHistory#ManagerHistory',
 					ClassicLeague: '@/models/classicLeague#ClassicLeague',
 					ClassicLeagueMeta:
 						'@/models/classicLeague#ClassicLeagueMeta',

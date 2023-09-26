@@ -9,7 +9,7 @@ import { ElementType as ElementTypeModel } from '@/models/elementType';
 import { Fixture as FixtureModel } from '@/models/fixture';
 import { Manager as ManagerModel, LeagueSummary as LeagueSummaryModel } from '@/models/manager';
 import { ManagerSquad as ManagerSquadModel, AutomaticSub as AutomaticSubModel, SquadPick as SquadPickModel } from '@/models/managerSquad';
-import { PastGameweek as PastGameweekModel, ManagerHistory as ManagerHistoryModel, GwChip as GwChipModel, PastSeason as PastSeasonModel } from '@/models/managerHistory';
+import { PastGameweek as PastGameweekModel, ManagerHistory as ManagerHistoryModel } from '@/models/managerHistory';
 import { ClassicLeague as ClassicLeagueModel, ClassicLeagueMeta as ClassicLeagueMetaModel, ClassicLeagueStandings as ClassicLeagueStandingsModel, ClassicLeagueStanding as ClassicLeagueStandingModel, NewEntries as NewEntriesModel, NewEntry as NewEntryModel } from '@/models/classicLeague';
 import { H2hLeague as H2hLeagueModel, H2hLeagueMeta as H2hLeagueMetaModel, H2hLeagueStandings as H2hLeagueStandingsModel, H2hLeagueStanding as H2hLeagueStandingModel } from '@/models/h2hLeague';
 export type Maybe<T> = T | null;
@@ -662,7 +662,7 @@ export type ResolversTypes = {
   Int: ResolverTypeWrapper<Scalars['Int']>;
   LeagueSummary: ResolverTypeWrapper<LeagueSummaryModel>;
   Manager: ResolverTypeWrapper<ManagerModel>;
-  ManagerHistory: ResolverTypeWrapper<Omit<ManagerHistory, 'current'> & { current?: Maybe<Array<Maybe<ResolversTypes['PastGameweek']>>> }>;
+  ManagerHistory: ResolverTypeWrapper<ManagerHistoryModel>;
   ManagerHistoryChips: ResolverTypeWrapper<ManagerHistoryChips>;
   ManagerHistoryPastSeason: ResolverTypeWrapper<ManagerHistoryPastSeason>;
   ManagerLeagues: ResolverTypeWrapper<Omit<ManagerLeagues, 'classic' | 'h2h'> & { classic?: Maybe<Array<Maybe<ResolversTypes['LeagueSummary']>>>, h2h?: Maybe<Array<Maybe<ResolversTypes['LeagueSummary']>>> }>;
@@ -701,7 +701,7 @@ export type ResolversParentTypes = {
   Int: Scalars['Int'];
   LeagueSummary: LeagueSummaryModel;
   Manager: ManagerModel;
-  ManagerHistory: Omit<ManagerHistory, 'current'> & { current?: Maybe<Array<Maybe<ResolversParentTypes['PastGameweek']>>> };
+  ManagerHistory: ManagerHistoryModel;
   ManagerHistoryChips: ManagerHistoryChips;
   ManagerHistoryPastSeason: ManagerHistoryPastSeason;
   ManagerLeagues: Omit<ManagerLeagues, 'classic' | 'h2h'> & { classic?: Maybe<Array<Maybe<ResolversParentTypes['LeagueSummary']>>>, h2h?: Maybe<Array<Maybe<ResolversParentTypes['LeagueSummary']>>> };
