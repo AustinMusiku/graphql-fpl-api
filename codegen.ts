@@ -36,7 +36,10 @@ const config: CodegenConfig = {
 					H2hLeagueStandings: '@/models/h2hLeague#H2hLeagueStandings',
 					H2hLeagueStanding: '@/models/h2hLeague#H2hLeagueStanding',
 					NewEntries: '@/models/classicLeague#NewEntries',
-					NewEntry: '@/models/classicLeague#NewEntry'
+					NewEntry: '@/models/classicLeague#NewEntry',
+					DreamTeam: '@/models/dreamTeam#DreamTeam',
+					DreamTeamTopPlayer: '@/models/dreamTeam#DreamTeamTopPlayer',
+					DreamTeamSquadPick: '@/models/dreamTeam#DreamTeamSquadPick'
 				}
 			}
 		}

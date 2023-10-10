@@ -1,5 +1,6 @@
 type Query {
 	classic_league(id: Int): ClassicLeague
+	dream_team(id: Int): DreamTeam
 	element_types: [ElementType]
 	fixtures(
 		gw: Int
@@ -493,4 +494,17 @@ type H2hLeagueStanding {
 	rank: Int
 	rank_sort: Int
 	total: Int
+}
+
+# ---------------------------------------------------
+# DreamTeam
+# ---------------------------------------------------
+type DreamTeam {
+	team: [DreamTeamSquadPick]
+	top_player: Player
+}
+
+type DreamTeamSquadPick {
+	element: Player
+	position: Int
 }

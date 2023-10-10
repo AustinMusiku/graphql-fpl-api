@@ -12,6 +12,7 @@ import { ManagerSquad as ManagerSquadModel, AutomaticSub as AutomaticSubModel, S
 import { PastGameweek as PastGameweekModel, ManagerHistory as ManagerHistoryModel } from '@/models/managerHistory';
 import { ClassicLeague as ClassicLeagueModel, ClassicLeagueMeta as ClassicLeagueMetaModel, ClassicLeagueStandings as ClassicLeagueStandingsModel, ClassicLeagueStanding as ClassicLeagueStandingModel, NewEntries as NewEntriesModel, NewEntry as NewEntryModel } from '@/models/classicLeague';
 import { H2hLeague as H2hLeagueModel, H2hLeagueMeta as H2hLeagueMetaModel, H2hLeagueStandings as H2hLeagueStandingsModel, H2hLeagueStanding as H2hLeagueStandingModel } from '@/models/h2hLeague';
+import { DreamTeam as DreamTeamModel, DreamTeamTopPlayer as DreamTeamTopPlayerModel, DreamTeamSquadPick as DreamTeamSquadPickModel } from '@/models/dreamTeam';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -84,6 +85,18 @@ export type ClassicLeagueStandings = {
   has_next?: Maybe<Scalars['Boolean']>;
   page?: Maybe<Scalars['Int']>;
   results?: Maybe<Array<Maybe<ClassicLeagueStanding>>>;
+};
+
+export type DreamTeam = {
+  __typename?: 'DreamTeam';
+  team?: Maybe<Array<Maybe<DreamTeamSquadPick>>>;
+  top_player?: Maybe<Player>;
+};
+
+export type DreamTeamSquadPick = {
+  __typename?: 'DreamTeamSquadPick';
+  element?: Maybe<Player>;
+  position?: Maybe<Scalars['Int']>;
 };
 
 export type ElementStats = {
@@ -450,6 +463,7 @@ export type PlayerUpcoming_FixturesArgs = {
 export type Query = {
   __typename?: 'Query';
   classic_league?: Maybe<ClassicLeague>;
+  dream_team?: Maybe<DreamTeam>;
   element_types?: Maybe<Array<Maybe<ElementType>>>;
   fixtures?: Maybe<Array<Maybe<Fixture>>>;
   gameweek?: Maybe<GameWeek>;
@@ -464,6 +478,11 @@ export type Query = {
 
 
 export type QueryClassic_LeagueArgs = {
+  id?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type QueryDream_TeamArgs = {
   id?: InputMaybe<Scalars['Int']>;
 };
 
@@ -649,6 +668,8 @@ export type ResolversTypes = {
   ClassicLeagueMeta: ResolverTypeWrapper<ClassicLeagueMetaModel>;
   ClassicLeagueStanding: ResolverTypeWrapper<ClassicLeagueStandingModel>;
   ClassicLeagueStandings: ResolverTypeWrapper<ClassicLeagueStandingsModel>;
+  DreamTeam: ResolverTypeWrapper<DreamTeamModel>;
+  DreamTeamSquadPick: ResolverTypeWrapper<DreamTeamSquadPickModel>;
   ElementStats: ResolverTypeWrapper<ElementStats>;
   ElementType: ResolverTypeWrapper<ElementTypeModel>;
   Fixture: ResolverTypeWrapper<FixtureModel>;
@@ -688,6 +709,8 @@ export type ResolversParentTypes = {
   ClassicLeagueMeta: ClassicLeagueMetaModel;
   ClassicLeagueStanding: ClassicLeagueStandingModel;
   ClassicLeagueStandings: ClassicLeagueStandingsModel;
+  DreamTeam: DreamTeamModel;
+  DreamTeamSquadPick: DreamTeamSquadPickModel;
   ElementStats: ElementStats;
   ElementType: ElementTypeModel;
   Fixture: FixtureModel;
@@ -774,6 +797,18 @@ export type ClassicLeagueStandingsResolvers<ContextType = any, ParentType extend
   has_next?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   page?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   results?: Resolver<Maybe<Array<Maybe<ResolversTypes['ClassicLeagueStanding']>>>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DreamTeamResolvers<ContextType = any, ParentType extends ResolversParentTypes['DreamTeam'] = ResolversParentTypes['DreamTeam']> = {
+  team?: Resolver<Maybe<Array<Maybe<ResolversTypes['DreamTeamSquadPick']>>>, ParentType, ContextType>;
+  top_player?: Resolver<Maybe<ResolversTypes['Player']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type DreamTeamSquadPickResolvers<ContextType = any, ParentType extends ResolversParentTypes['DreamTeamSquadPick'] = ResolversParentTypes['DreamTeamSquadPick']> = {
+  element?: Resolver<Maybe<ResolversTypes['Player']>, ParentType, ContextType>;
+  position?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1126,6 +1161,7 @@ export type PlayerResolvers<ContextType = any, ParentType extends ResolversParen
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   classic_league?: Resolver<Maybe<ResolversTypes['ClassicLeague']>, ParentType, ContextType, Partial<QueryClassic_LeagueArgs>>;
+  dream_team?: Resolver<Maybe<ResolversTypes['DreamTeam']>, ParentType, ContextType, Partial<QueryDream_TeamArgs>>;
   element_types?: Resolver<Maybe<Array<Maybe<ResolversTypes['ElementType']>>>, ParentType, ContextType>;
   fixtures?: Resolver<Maybe<Array<Maybe<ResolversTypes['Fixture']>>>, ParentType, ContextType, Partial<QueryFixturesArgs>>;
   gameweek?: Resolver<Maybe<ResolversTypes['GameWeek']>, ParentType, ContextType, Partial<QueryGameweekArgs>>;
@@ -1196,6 +1232,8 @@ export type Resolvers<ContextType = any> = {
   ClassicLeagueMeta?: ClassicLeagueMetaResolvers<ContextType>;
   ClassicLeagueStanding?: ClassicLeagueStandingResolvers<ContextType>;
   ClassicLeagueStandings?: ClassicLeagueStandingsResolvers<ContextType>;
+  DreamTeam?: DreamTeamResolvers<ContextType>;
+  DreamTeamSquadPick?: DreamTeamSquadPickResolvers<ContextType>;
   ElementStats?: ElementStatsResolvers<ContextType>;
   ElementType?: ElementTypeResolvers<ContextType>;
   Fixture?: FixtureResolvers<ContextType>;
