@@ -105,6 +105,15 @@ class FetchController {
 		}
 	}
 
+	async getDreamTeam(gwId: number) {
+		try {
+			const url = urls.dreamTeam + gwId
+			return await this.fetchFromCache(`dt`, url)
+		} catch (err) {
+			console.log(`Error fetching dream team: ${err}`)
+		}
+	}
+
 	// -------------------------------------------------------------------
 	async getAllPlayers() {
 		try {
