@@ -162,5 +162,9 @@ export const Query: QueryResolvers = {
 	h2h_league: async (_: unknown, { id }: { id: number }) => {
 		const league = await fetchController.getH2hLeague(id)
 		return league
+	},
+	dream_team: async (_, { id }: { id: number }) => {
+		const dreamTeam = await fetchController.getDreamTeam(id)
+		return dreamTeam
 	}
 }

@@ -10,6 +10,7 @@ import { Fixture } from './fixture'
 import * as Manager from './manager'
 import * as ClassicLeague from './classicLeague'
 import * as H2hLeague from './h2hLeague'
+import * as DreamTeam from './dreamTeam'
 
 export default {
 	Query,
@@ -23,5 +24,6 @@ export default {
 	Fixture,
 	...Manager,
 	...ClassicLeague,
-	...H2hLeague
+	...H2hLeague,
+	...DreamTeam
 }
