@@ -70,5 +70,13 @@ export const loaders = {
 				)
 			})
 		}
-	)
+	),
+	setPieceNotes: new dataLoader(async (keys: readonly number[]) => {
+		return keys.map(async (key) => {
+			return await fetchController.getSetPieceNotesByTeam.call(
+				fetchController,
+				key
+			)
+		})
+	})
 }
