@@ -13,6 +13,7 @@ import { PastGameweek as PastGameweekModel, ManagerHistory as ManagerHistoryMode
 import { ClassicLeague as ClassicLeagueModel, ClassicLeagueMeta as ClassicLeagueMetaModel, ClassicLeagueStandings as ClassicLeagueStandingsModel, ClassicLeagueStanding as ClassicLeagueStandingModel, NewEntries as NewEntriesModel, NewEntry as NewEntryModel } from '@/models/classicLeague';
 import { H2hLeague as H2hLeagueModel, H2hLeagueMeta as H2hLeagueMetaModel, H2hLeagueStandings as H2hLeagueStandingsModel, H2hLeagueStanding as H2hLeagueStandingModel } from '@/models/h2hLeague';
 import { DreamTeam as DreamTeamModel, DreamTeamTopPlayer as DreamTeamTopPlayerModel, DreamTeamSquadPick as DreamTeamSquadPickModel } from '@/models/dreamTeam';
+import { SetPieceNotes as SetPieceNotesModel, TeamSetPieceNote as TeamSetPieceNoteModel } from '@/models/setPieceNotes';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -472,6 +473,7 @@ export type Query = {
   manager?: Maybe<Manager>;
   player?: Maybe<Player>;
   players?: Maybe<Array<Maybe<Player>>>;
+  set_piece_notes_last_updated?: Maybe<Scalars['String']>;
   team?: Maybe<Team>;
   teams?: Maybe<Array<Maybe<Team>>>;
 };
@@ -562,6 +564,7 @@ export type Team = {
   points?: Maybe<Scalars['Int']>;
   position?: Maybe<Scalars['Int']>;
   pulse_id?: Maybe<Scalars['Int']>;
+  set_piece_notes?: Maybe<Array<Maybe<TeamSetPieceNote>>>;
   short_name?: Maybe<Scalars['String']>;
   strength?: Maybe<Scalars['Int']>;
   strength_attack_away?: Maybe<Scalars['Int']>;
@@ -571,6 +574,13 @@ export type Team = {
   strength_overall_away?: Maybe<Scalars['Int']>;
   strength_overall_home?: Maybe<Scalars['Int']>;
   win?: Maybe<Scalars['Int']>;
+};
+
+export type TeamSetPieceNote = {
+  __typename?: 'TeamSetPieceNote';
+  external_link?: Maybe<Scalars['Boolean']>;
+  info_message?: Maybe<Scalars['String']>;
+  source_link?: Maybe<Scalars['String']>;
 };
 
 export type UpcomingFixture = {
@@ -697,6 +707,7 @@ export type ResolversTypes = {
   SquadPick: ResolverTypeWrapper<SquadPickModel>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Team: ResolverTypeWrapper<TeamModel>;
+  TeamSetPieceNote: ResolverTypeWrapper<TeamSetPieceNoteModel>;
   UpcomingFixture: ResolverTypeWrapper<UpcomingFixtureModel>;
 };
 
@@ -738,6 +749,7 @@ export type ResolversParentTypes = {
   SquadPick: SquadPickModel;
   String: Scalars['String'];
   Team: TeamModel;
+  TeamSetPieceNote: TeamSetPieceNoteModel;
   UpcomingFixture: UpcomingFixtureModel;
 };
 
@@ -1170,6 +1182,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   manager?: Resolver<Maybe<ResolversTypes['Manager']>, ParentType, ContextType, Partial<QueryManagerArgs>>;
   player?: Resolver<Maybe<ResolversTypes['Player']>, ParentType, ContextType, Partial<QueryPlayerArgs>>;
   players?: Resolver<Maybe<Array<Maybe<ResolversTypes['Player']>>>, ParentType, ContextType, Partial<QueryPlayersArgs>>;
+  set_piece_notes_last_updated?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   team?: Resolver<Maybe<ResolversTypes['Team']>, ParentType, ContextType, Partial<QueryTeamArgs>>;
   teams?: Resolver<Maybe<Array<Maybe<ResolversTypes['Team']>>>, ParentType, ContextType>;
 };
@@ -1194,6 +1207,7 @@ export type TeamResolvers<ContextType = any, ParentType extends ResolversParentT
   points?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   position?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   pulse_id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  set_piece_notes?: Resolver<Maybe<Array<Maybe<ResolversTypes['TeamSetPieceNote']>>>, ParentType, ContextType>;
   short_name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   strength?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   strength_attack_away?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
@@ -1203,6 +1217,13 @@ export type TeamResolvers<ContextType = any, ParentType extends ResolversParentT
   strength_overall_away?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   strength_overall_home?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   win?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type TeamSetPieceNoteResolvers<ContextType = any, ParentType extends ResolversParentTypes['TeamSetPieceNote'] = ResolversParentTypes['TeamSetPieceNote']> = {
+  external_link?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  info_message?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  source_link?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1258,6 +1279,7 @@ export type Resolvers<ContextType = any> = {
   Query?: QueryResolvers<ContextType>;
   SquadPick?: SquadPickResolvers<ContextType>;
   Team?: TeamResolvers<ContextType>;
+  TeamSetPieceNote?: TeamSetPieceNoteResolvers<ContextType>;
   UpcomingFixture?: UpcomingFixtureResolvers<ContextType>;
 };
 

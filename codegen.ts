@@ -39,7 +39,9 @@ const config: CodegenConfig = {
 					NewEntry: '@/models/classicLeague#NewEntry',
 					DreamTeam: '@/models/dreamTeam#DreamTeam',
 					DreamTeamTopPlayer: '@/models/dreamTeam#DreamTeamTopPlayer',
-					DreamTeamSquadPick: '@/models/dreamTeam#DreamTeamSquadPick'
+					DreamTeamSquadPick: '@/models/dreamTeam#DreamTeamSquadPick',
+					SetPieceNotes: '@/models/setPieceNotes#SetPieceNotes',
+					TeamSetPieceNote: '@/models/setPieceNotes#TeamSetPieceNote'
 				}
 			}
 		}

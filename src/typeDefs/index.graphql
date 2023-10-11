@@ -26,6 +26,7 @@ type Query {
 		mid_rangers: Boolean
 		budgets: Boolean
 	): [Player]
+	set_piece_notes_last_updated: String
 	team(id: Int): Team
 	teams: [Team]
 }
@@ -217,6 +218,7 @@ type Team {
 	points: Int
 	position: Int
 	pulse_id: Int
+	set_piece_notes: [TeamSetPieceNote]
 	short_name: String
 	strength: Int
 	strength_attack_away: Int
@@ -226,6 +228,12 @@ type Team {
 	strength_overall_away: Int
 	strength_overall_home: Int
 	win: Int
+}
+
+type TeamSetPieceNote {
+	external_link: Boolean
+	info_message: String
+	source_link: String
 }
 
 # ---------------------------------------------------
