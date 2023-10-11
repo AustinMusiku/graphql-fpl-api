@@ -166,5 +166,9 @@ export const Query: QueryResolvers = {
 	dream_team: async (_, { id }: { id: number }) => {
 		const dreamTeam = await fetchController.getDreamTeam(id)
 		return dreamTeam
+	},
+	set_piece_notes_last_updated: async () => {
+		const setPieceNotes = await fetchController.getSetPieceNotes()
+		return setPieceNotes.last_updated
 	}
 }

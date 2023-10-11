@@ -1,4 +1,4 @@
-import { TeamResolvers } from '../types/schema'
+import { TeamResolvers, TeamSetPieceNoteResolvers } from '../types/schema'
 
 export const Team: TeamResolvers = {
 	code: ({ code }) => code,
@@ -22,5 +22,15 @@ export const Team: TeamResolvers = {
 	strength_defence_home: ({ strength_defence_home }) => strength_defence_home,
 	strength_overall_away: ({ strength_overall_away }) => strength_overall_away,
 	strength_overall_home: ({ strength_overall_home }) => strength_overall_home,
-	win: ({ win }) => win
+	win: ({ win }) => win,
+	set_piece_notes: async ({ id }, _, { loaders }) => {
+		const setPieceNotes = await loaders.setPieceNotes.load(id)
+		return setPieceNotes.notes
+	}
+}
+
+export const TeamSetPieceNote: TeamSetPieceNoteResolvers = {
+	external_link: ({ external_link }) => external_link,
+	info_message: ({ info_message }) => info_message,
+	source_link: ({ source_link }) => source_link
 }
