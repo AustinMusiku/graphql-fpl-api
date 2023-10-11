@@ -8,5 +8,6 @@ export const urls = {
 	manager: 'https://fantasy.premierleague.com/api/entry/',
 	classicLeague: 'https://fantasy.premierleague.com/api/leagues-classic/',
 	h2hLeague: 'https://fantasy.premierleague.com/api/leagues-h2h/',
-	dreamTeam: 'https://fantasy.premierleague.com/api/dream-team/'
+	dreamTeam: 'https://fantasy.premierleague.com/api/dream-team/',
+	setPieceNotes: 'https://fantasy.premierleague.com/api/team/set-piece-notes/'
 }

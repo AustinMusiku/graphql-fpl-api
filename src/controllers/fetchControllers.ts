@@ -114,6 +114,17 @@ class FetchController {
 		}
 	}
 
+	async getSetPieceNotes() {
+		try {
+			return await this.fetchFromCache(
+				'setPieceNotes',
+				urls.setPieceNotes
+			)
+		} catch (err) {
+			console.log(`Error fetching set piece notes: ${err}`)
+		}
+	}
+
 	// -------------------------------------------------------------------
 	async getAllPlayers() {
 		try {
@@ -225,6 +236,20 @@ class FetchController {
 			return elementType
 		} catch (err) {
 			console.log(`Error fetching element type-${elementTypeId}: ${err}`)
+		}
+	}
+
+	async getSetPieceNotesByTeam(teamId: number) {
+		try {
+			const setPieceNotes = await this.getSetPieceNotes()
+			const setPieceNotesByTeam = setPieceNotes.teams.find(
+				({ id }) => id == teamId
+			)
+			return setPieceNotesByTeam
+		} catch (err) {
+			console.log(
+				`Error fetching set piece notes by team-${teamId}: ${err}`
+			)
 		}
 	}
 }
