@@ -9,7 +9,7 @@ class Cache {
 		}
 	}
 
-	public static getCache(): nodeCache {
+	public static getInstance(): nodeCache {
 		if (Cache.instance) {
 			return Cache.instance
 		} else {
@@ -22,4 +22,4 @@ class Cache {
 	}
 }
 
-export default Cache.getCache()
+export default Cache.getInstance()
