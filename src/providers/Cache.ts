@@ -1,7 +1,7 @@
 import nodeCache from 'node-cache'
 
 class Cache {
-	private static instance: Cache
+	private static instance: nodeCache
 
 	constructor() {
 		if (Cache.instance) {
@@ -9,7 +9,7 @@ class Cache {
 		}
 	}
 
-	public static getCache(): Cache {
+	public static getCache(): nodeCache {
 		if (Cache.instance) {
 			return Cache.instance
 		} else {
@@ -19,14 +19,6 @@ class Cache {
 			})
 			return Cache.instance
 		}
-	}
-
-	get(key: string) {
-		return Cache.instance.get(key)
-	}
-
-	set(key: string, value: string) {
-		Cache.instance.set(key, value)
 	}
 }
 
