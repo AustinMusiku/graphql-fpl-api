@@ -1,3 +1,4 @@
+import path from 'path'
 import { Application } from 'express'
 import { createYoga } from 'graphql-yoga'
 import { cpus, totalmem } from 'os'
@@ -9,13 +10,9 @@ import { loaders } from '../loaders'
 class Routes {
 	// default route
 	public mountDefault(_express: Application): Application {
-		return _express.get('/', (req, res) => {
-			// return html page with link to graphql playground
-			res.send(`
-				<h1>Fplfriend</h1>
-				<a href="/graphql">Click here to go to GraphQL Playground</a>
-				<p>For more information, visit <a href="https://www.github.com/austinmusiku/graphql-fpl-api">github repo</a></p>
-			`)
+		return _express.get('/', (_, res) => {
+			const page = path.join(__dirname, '../../public/index.html')
+			res.sendFile(page)
 		})
 	}
 
