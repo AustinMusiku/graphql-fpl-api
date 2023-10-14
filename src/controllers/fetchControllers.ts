@@ -2,10 +2,35 @@ import fetch from 'node-fetch'
 import { urls } from './urls'
 
 import cache from '../providers/Cache'
+import { General } from '../models/general'
+import { Fixture } from '../models/fixture'
+import { PlayerEvent } from '../models/player'
+import { Manager } from '../models/manager'
+import { ManagerHistory } from '../models/managerHistory'
+import { ManagerSquad } from '../models/managerSquad'
+import { ClassicLeague } from '../models/classicLeague'
+import { H2hLeague } from '../models/h2hLeague'
+import { DreamTeam } from '../models/dreamTeam'
+import { SetPieceNotes } from '../models/setPieceNotes'
+
+type Cachable =
+	| General
+	| Fixture[]
+	| PlayerEvent
+	| Manager
+	| ManagerHistory
+	| ManagerSquad
+	| ClassicLeague
+	| H2hLeague
+	| DreamTeam
+	| SetPieceNotes
 
 class FetchController {
+	private cache = cache.getInstance()
+	private nextGwDeadline: number | undefined
+
 	// helper
-	async fetchFromApi(url: string) {
+	async getFromApi(url: string) {
 		try {
 			const payload = await fetch(url, {
 				headers: {
@@ -14,20 +39,45 @@ class FetchController {
 			})
 			return await payload.json()
 		} catch (err) {
-			console.log(`Failed to fetch from ${url}: ${err}`)
+			console.log(`Get request to ${url} failed: ${err}`)
 		}
 	}
 
 	// cache wrapper
-	async fetchFromCache(key: string, url: string) {
+	async fetchFromCache(key: string, url: string): Promise<Cachable> {
 		try {
-			let data = cache.get(key)
-			// incase of a cache miss, fetch from the api and
-			// populate the cache
+			let data = this.cache.get(key) as Cachable
+			// incase of a cache miss, fetch from the api
 			if (data === undefined) {
-				data = await this.fetchFromApi(url)
+				data = await this.getFromApi(url)
 			}
-			cache.set(key, data)
+
+			// Check if we just grabbed the general data.
+			// If so, set the next gw deadline
+			if (key === 'general') {
+				const general = data as General
+				const nextGw = general.events.find(({ is_next }) => is_next)
+				this.nextGwDeadline = Date.parse(nextGw.deadline_time)
+			}
+
+			const currentTtl = this.cache.getTtl(key)
+
+			// not cached yet && this.nextGwDeadline is set
+			if (currentTtl === undefined && this.nextGwDeadline) {
+				this.cache.set(key, data, this.nextGwDeadline)
+			}
+
+			// cached && this.nextGwDeadline is set
+			// (value is cached though ttl needs to be updated)
+			if (currentTtl !== this.nextGwDeadline && this.nextGwDeadline) {
+				this.cache.ttl(key, (this.nextGwDeadline - Date.now()) / 1000)
+			}
+
+			// not cached yet && this.nextGwDeadline is not set
+			if (currentTtl === undefined && this.nextGwDeadline === undefined) {
+				this.cache.set(key, data) // use default ttl
+			}
+
 			return data
 		} catch (err) {
 			console.log(`Failed to fetch ${key}: ${err}`)
@@ -35,91 +85,141 @@ class FetchController {
 	}
 
 	// -------------------------------------------------------------------
-	async getGeneral() {
+	async getGeneral(): Promise<General> {
 		try {
-			return await this.fetchFromCache('general', urls['general'])
+			const general = (await this.fetchFromCache(
+				'general',
+				urls['general']
+			)) as General
+
+			return general
 		} catch (err) {
 			console.log(`Error fetching general data: ${err}`)
 		}
 	}
 
-	async getFixtures() {
+	async getFixtures(): Promise<Fixture[]> {
 		try {
-			return await this.fetchFromCache('fixtures', urls['fixtures'])
+			const fixtures = (await this.fetchFromCache(
+				'fixtures',
+				urls['fixtures']
+			)) as Fixture[]
+
+			return fixtures
 		} catch (err) {
 			console.log(`Error fetching fixtures data: ${err}`)
 		}
 	}
 
-	async getPlayerEvents(playerId: number) {
+	async getPlayerEvents(playerId: number): Promise<PlayerEvent> {
 		try {
 			const url = urls.playerById + playerId
-			return await this.fetchFromCache(`p${playerId}`, url)
+			const playerEvents = (await this.fetchFromCache(
+				`p${playerId}`,
+				url
+			)) as PlayerEvent
+
+			return playerEvents
 		} catch (err) {
 			console.log(`Error fetching player-${playerId}: ${err}`)
 		}
 	}
 
-	async getManager(managerId: number) {
+	async getManager(managerId: number): Promise<Manager> {
 		try {
 			const url = urls.manager + managerId
-			return await this.fetchFromCache(`m${managerId}`, url)
+			const manager = (await this.fetchFromCache(
+				`m${managerId}`,
+				url
+			)) as Manager
+
+			return manager
 		} catch (err) {
 			console.log(`Error fetching manager-${managerId}: ${err}`)
 		}
 	}
 
-	async getManagerHistory(managerId: number) {
+	async getManagerHistory(managerId: number): Promise<ManagerHistory> {
 		try {
 			const url = urls.manager + managerId + '/history/'
-			return await this.fetchFromCache(`mh${managerId}`, url)
+			const managerHistory = (await this.fetchFromCache(
+				`mh${managerId}`,
+				url
+			)) as ManagerHistory
+
+			return managerHistory
 		} catch (err) {
 			console.log(`Error fetching manager-${managerId} history: ${err}`)
 		}
 	}
 
-	async getManagerSquad(managerId: number, gwId: number) {
+	async getManagerSquad(
+		managerId: number,
+		gwId: number
+	): Promise<ManagerSquad> {
 		try {
 			const url = urls.manager + managerId + '/event/' + gwId + '/picks/'
-			return await this.fetchFromCache(`ms${managerId}`, url)
+			const managerSquad = (await this.fetchFromCache(
+				`ms${managerId}`,
+				url
+			)) as ManagerSquad
+
+			return managerSquad
 		} catch (err) {
 			console.log(`Error fetching manager-${managerId} squad: ${err}`)
 		}
 	}
 
-	async getClassicLeague(id: number) {
+	async getClassicLeague(id: number): Promise<ClassicLeague> {
 		try {
 			const url = urls.classicLeague + id + '/standings/'
-			return await this.fetchFromCache(`cl${id}`, url)
+			const classicLeague = (await this.fetchFromCache(
+				`cl${id}`,
+				url
+			)) as ClassicLeague
+
+			return classicLeague
 		} catch (err) {
 			console.log(`Error fetching classic-league ${id}: ${err}`)
 		}
 	}
 
-	async getH2hLeague(id: number) {
+	async getH2hLeague(id: number): Promise<H2hLeague> {
 		try {
 			const url = urls.h2hLeague + id + '/standings/'
-			return await this.fetchFromCache(`hl${id}`, url)
+			const h2hLeague = (await this.fetchFromCache(
+				`hl${id}`,
+				url
+			)) as H2hLeague
+
+			return h2hLeague
 		} catch (err) {
 			console.log(`Error fetching h2h-league ${id}: ${err}`)
 		}
 	}
 
-	async getDreamTeam(gwId: number) {
+	async getDreamTeam(gwId: number): Promise<DreamTeam> {
 		try {
 			const url = urls.dreamTeam + gwId
-			return await this.fetchFromCache(`dt`, url)
+			const dreamTeam = (await this.fetchFromCache(
+				`dt${gwId}`,
+				url
+			)) as DreamTeam
+
+			return dreamTeam
 		} catch (err) {
 			console.log(`Error fetching dream team: ${err}`)
 		}
 	}
 
-	async getSetPieceNotes() {
+	async getSetPieceNotes(): Promise<SetPieceNotes> {
 		try {
-			return await this.fetchFromCache(
+			const setPieceNotes = (await this.fetchFromCache(
 				'setPieceNotes',
-				urls.setPieceNotes
-			)
+				urls['setPieceNotes']
+			)) as SetPieceNotes
+
+			return setPieceNotes
 		} catch (err) {
 			console.log(`Error fetching set piece notes: ${err}`)
 		}
@@ -172,7 +272,14 @@ class FetchController {
 			)
 		}
 
-		function addIsHomeAndDifficulty(fixture) {
+		type FixtureWithIsHomeAndDifficulty = Fixture & {
+			is_home: boolean
+			difficulty: number
+		}
+
+		function addIsHomeAndDifficulty(
+			fixture: Fixture
+		): FixtureWithIsHomeAndDifficulty {
 			return {
 				...fixture,
 				is_home: fixture.team_h === teamId,

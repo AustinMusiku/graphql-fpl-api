@@ -93,3 +93,9 @@ export type Player = {
 	starts_per_90: number
 	clean_sheets_per_90: number
 }
+
+export type PlayerEvent = {
+	fixtures: UpcomingFixture[]
+	history: PastFixture[]
+	history_past: unknown[]
+}
