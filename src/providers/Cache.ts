@@ -22,4 +22,4 @@ class Cache {
 	}
 }
 
-export default Cache.getInstance()
+export default Cache
