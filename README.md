@@ -105,55 +105,6 @@ query Manager {
 }
 ```
 
-Produces the following response:
-
-```json
-"data": {
-    "manager": {
-      "player_first_name": "Austin",
-      "player_last_name": "Musiku",
-      "leagues": {
-        "classic": [
-			{
-				"name": "Arsenal",
-				"entry_rank": 575740
-			},
-			{
-				"name": "Kenya",
-				"entry_rank": 56656
-			},
-			{
-				"name": "Gameweek 1",
-				"entry_rank": 3334468
-			},
-			//...
-			{
-				"name": "DEVELOPERS PREMIER LEAGUE",
-				"entry_rank": 4
-			}
-        ]
-      },
-      "squad": {
-        "picks": [
-			{
-				"element": {
-					"web_name": "Areola"
-				},
-				"is_captain": false
-			},
-			// ...
-			{
-				"element": {
-					"web_name": "Haaland"
-				},
-				"is_captain": true
-			}
-        ]
-      }
-    }
-  }
-```
-
 ### Example query for a getting a specific gameweek's data
 
 ```graphql
@@ -167,40 +118,6 @@ query Gameweek6 {
 		chip_plays {
 			chip_name
 			num_played
-		}
-	}
-}
-```
-
-Produces the following response:
-
-```json
-{
-	"data": {
-		"gameweek": {
-			"id": 6,
-			"deadline_time": "2023-09-23T12:30:00Z",
-			"finished": true,
-			"highest_score": 142,
-			"avg_points": 68,
-			"chip_plays": [
-				{
-					"chip_name": "bboost",
-					"num_played": 78528
-				},
-				{
-					"chip_name": "freehit",
-					"num_played": 60517
-				},
-				{
-					"chip_name": "wildcard",
-					"num_played": 283333
-				},
-				{
-					"chip_name": "3xc",
-					"num_played": 192955
-				}
-			]
 		}
 	}
 }
