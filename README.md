@@ -4,7 +4,7 @@ A Rich GraphQL proxy layer on top of the official Fantasy Premier League REST AP
 
 ⚠️ This api does not support the two highly volatile data from the official api: gameweek live data and event status. This api relies heavily on caching to reduce the number of roundtrips to the official api and these two datasets are too dynamic to be cached without the risk of constantly serving stale data. An efficient cache invalidation strategy for this case is still being worked on.
 
-[Try the live demo here](https://graphql-fpl-api.up.railway.app/graphql)
+[Try the live demo here](https://graphql-fpl-api.onrender.com/graphql)
 
 ## Why graphql-fpl-api?
 
